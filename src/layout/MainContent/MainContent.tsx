@@ -1,11 +1,14 @@
 import React from 'react';
-
 import styles from './MainContent.module.css';
 
-const MainContent = () => {
+type MainContentProps = {
+    children: React.ReactNode
+};
+
+const MainContent = (props: MainContentProps) => {
     return (
         <div className={styles.container}>
-            MainContent
+            {props.children}
         </div>
     );
 };
