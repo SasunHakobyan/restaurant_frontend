@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Route, Routes} from "react-router-dom";
 
 import Navigation from "./layout/Navigation/Navigation";
@@ -6,14 +6,23 @@ import Navigation from "./layout/Navigation/Navigation";
 import './app.css';
 import HomePage from "./pages/HomePage/HomePage";
 import AuthModal from "./components/AuthModal/AuthModal";
+import {useAppSelector} from "./store/store";
+import {useDispatch} from "react-redux";
+import {modalSlice} from "./store/reducers/modalReducer";
 
 function App() {
-    const [isModalShow, toggleModal] = useState(false);
+    const modalState = useAppSelector(state => state.modalReducer);
+    const authState = useAppSelector(state => state.userReducer);
+    const dispatch = useDispatch();
+
+    const toggleModal = (showModal: boolean) => {
+        dispatch(modalSlice.actions.setShowModal(showModal));
+    }
 
     return (
         <div className='app'>
-            {isModalShow && <AuthModal toggleModal={toggleModal} />}
-            <Navigation toggleModal={toggleModal} />
+            {!authState.isLoggedIn && modalState.showModal && <AuthModal toggleModal={toggleModal} />}
+            <Navigation isLoggedIn={authState.isLoggedIn} toggleModal={toggleModal} />
             <Routes>
                 <Route path='/' element={<HomePage/>} />
             </Routes>

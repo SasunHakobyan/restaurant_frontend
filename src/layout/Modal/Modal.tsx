@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Modal.module.css';
 
 interface IModalProps {
-    toggleModal: React.Dispatch<React.SetStateAction<boolean>>,
+    toggleModal: (showModal: boolean) => void;
     children: React.ReactNode
 }
 

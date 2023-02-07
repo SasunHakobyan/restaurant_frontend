@@ -9,7 +9,7 @@ const HomePage = () => {
     return (
         <MainContent>
             <div>
-                <img className={styles.bannerImg} src={offerBanner}/>
+                <img alt='banner' className={styles.bannerImg} src={offerBanner}/>
             </div>
             <div>
                 <h2 className={styles.dealText}>Deals</h2>

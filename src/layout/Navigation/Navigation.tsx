@@ -5,14 +5,21 @@ import restaurantLogo from '../../assets/logos/restaurant.svg';
 import mealLogo from '../../assets/logos/meal.svg';
 import profileLogo from '../../assets/logos/profile.svg';
 import {NavLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {authSlice} from "../../store/reducers/authReducer";
 
 interface INavigationProps {
-    toggleModal: React.Dispatch<React.SetStateAction<boolean>>
+    isLoggedIn: boolean;
+    toggleModal: (showModal: boolean) => void;
 }
 
 const Navigation = (props: INavigationProps) => {
-    
+    const dispatch = useDispatch();
+
     const onProfileButtonClick = () => props.toggleModal(true)
+    const onLogoutButtonClick = () => {
+        dispatch(authSlice.actions.logout());
+    }
 
     return (
         <div className={styles.navigation}>
@@ -25,18 +32,19 @@ const Navigation = (props: INavigationProps) => {
             </div>
             <div  className={styles.logoContainer}>
                 <NavLink to='/restaurants'>
-                    <img className={styles.logo} src={restaurantLogo} />
+                    <img alt='menu' className={styles.logo} src={restaurantLogo} />
                 </NavLink>
             </div>
             <div  className={styles.logoContainer}>
                 <NavLink to='/meals'>
-                    <img className={styles.logo} src={mealLogo} />
+                    <img alt='menu' className={styles.logo} src={mealLogo} />
                 </NavLink>
             </div>
             <div  className={styles.logoContainer}>
                 <button className={styles.modalBtn} onClick={onProfileButtonClick}>
-                    <img className={styles.logo} src={profileLogo} />
+                    <img alt='menu' className={styles.logo} src={profileLogo} />
                 </button>
+                {props.isLoggedIn && <button onClick={onLogoutButtonClick}>Logout</button>}
             </div>
         </div>
     );
