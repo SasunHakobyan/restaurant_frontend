@@ -1,5 +1,5 @@
 .navigation {
-    flex-grow: 1;
+    width: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,6 +29,8 @@
     fill: #FA6400;
 }
 
-.active {
-
+.modalBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
