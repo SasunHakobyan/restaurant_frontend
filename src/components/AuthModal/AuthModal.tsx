@@ -6,6 +6,7 @@ import {modalSlice} from "../../store/reducers/modalReducer";
 import {useDispatch} from "react-redux";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import styles from './AuthModal.module.css';
+import { useLoginMutation } from '../../services/authApi';
 
 interface IAuthModalProps {
     toggleModal: (showModal: boolean) => void;
@@ -13,6 +14,7 @@ interface IAuthModalProps {
 
 const AuthModal = (props: IAuthModalProps) => {
     const dispatch = useDispatch();
+    const [login, result] = useLoginMutation();
 
     const {
         register,
@@ -22,11 +24,18 @@ const AuthModal = (props: IAuthModalProps) => {
         handleSubmit
     } = useForm();
 
-    const formSubmitHandler: SubmitHandler<FieldValues> = (data) => {
+    const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
         const user: IUser = {
             id: 1,
             username: data.username
         }
+
+        await login({
+            username: data.username,
+            password: data.password
+        }).unwrap();
+
+        console.log(result);
 
         dispatch(authSlice.actions.login(user));
         dispatch(modalSlice.actions.setShowModal(false));

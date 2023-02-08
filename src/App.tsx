@@ -14,7 +14,8 @@ import MealsPage from "./pages/MealsPage/MealsPage";
 
 function App() {
     const modalState = useAppSelector(state => state.modalReducer);
-    const authState = useAppSelector(state => state.userReducer);
+    const authState = useAppSelector(state => state.authReducer);
+    
     const dispatch = useDispatch();
 
     const toggleModal = (showModal: boolean) => {
