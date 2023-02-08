@@ -1,0 +1,18 @@
+.itemContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-bottom: 1rem;
+}
+
+.restImg {
+    width: 100%;
+}
+
+.infoContainer {
+    margin-left: .5rem;
+}
+
+.infoContainer h3 {
+    margin: 0;
+    padding: 0;
+}

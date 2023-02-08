@@ -9,6 +9,8 @@ import AuthModal from "./components/AuthModal/AuthModal";
 import {useAppSelector} from "./store/store";
 import {useDispatch} from "react-redux";
 import {modalSlice} from "./store/reducers/modalReducer";
+import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
+import MealsPage from "./pages/MealsPage/MealsPage";
 
 function App() {
     const modalState = useAppSelector(state => state.modalReducer);
@@ -25,6 +27,8 @@ function App() {
             <Navigation isLoggedIn={authState.isLoggedIn} toggleModal={toggleModal} />
             <Routes>
                 <Route path='/' element={<HomePage/>} />
+                <Route path='/restaurants' element={<RestaurantsPage/>} />
+                <Route path='/meals' element={<MealsPage/>} />
             </Routes>
             <div style={{width: '25%'}}>Orders</div>
         </div>

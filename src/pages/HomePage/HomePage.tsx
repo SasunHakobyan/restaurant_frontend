@@ -3,7 +3,7 @@ import MainContent from "../../layout/MainContent/MainContent";
 
 import offerBanner from '../../assets/offer-banner.avif';
 import styles from './HomePage.module.css';
-import ItemList from "../../components/ItemList/ItemList";
+import MealGrid from "../../components/MealGrid/MealGrid";
 
 const HomePage = () => {
     return (
@@ -14,7 +14,7 @@ const HomePage = () => {
             <div>
                 <h2 className={styles.dealText}>Deals</h2>
             </div>
-            <ItemList/>
+            <MealGrid/>
         </MainContent>
     );
 };

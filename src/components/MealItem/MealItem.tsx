@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Product.module.css';
+import styles from './MealItem.module.css';
 
 import productImg from '../../assets/product.jpg';
 
-const Product = () => {
+const MealItem = () => {
     return (
         <div className={styles.cardContainer}>
             <img alt='product' className={styles.productImg} src={productImg} />
@@ -18,4 +18,4 @@ const Product = () => {
     );
 };
 
-export default Product;
+export default MealItem;
