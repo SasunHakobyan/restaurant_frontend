@@ -1,20 +1,14 @@
 import React from 'react';
 import Modal from "../../layout/Modal/Modal";
-import {authSlice} from "../../store/reducers/authReducer";
-import {IUser} from "../../models/user";
-import {modalSlice} from "../../store/reducers/modalReducer";
-import {useDispatch} from "react-redux";
+import {authSlice, loginUser} from "../../store/reducers/authReducer";
+import {IUser, IUserAuth} from "../../models/user";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import styles from './AuthModal.module.css';
-import { useLoginMutation } from '../../services/authApi';
+import {useAppDispatch, useAppSelector} from "../../store/store";
 
-interface IAuthModalProps {
-    toggleModal: (showModal: boolean) => void;
-}
-
-const AuthModal = (props: IAuthModalProps) => {
-    const dispatch = useDispatch();
-    const [loginApi] = useLoginMutation();
+const AuthModal = () => {
+    const dispatch = useAppDispatch();
+    const authState = useAppSelector(state => state.authReducer);
 
     const {
         register,
@@ -26,24 +20,21 @@ const AuthModal = (props: IAuthModalProps) => {
 
     const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
         const user: IUser = {
-            id: 1,
             username: data.username
         }
 
-        const {accessToken} = await loginApi({
+        const reqBody: IUserAuth = {
             username: data.username,
             password: data.password
-        }).unwrap();
+        }
 
-        localStorage.setItem('authToken', accessToken);
-
-        dispatch(authSlice.actions.login(user));
-        dispatch(modalSlice.actions.setShowModal(false));
+        dispatch(loginUser(reqBody));
     }
 
     return (
-        <Modal toggleModal={props.toggleModal}>
+        <Modal>
             <form onSubmit={handleSubmit(formSubmitHandler)}>
+                {authState.error && <div className={styles.formError}>{authState.error}</div>}
                 <div className={styles.formControl}>
                     <label>Username</label>
                     <input {...register('username', {

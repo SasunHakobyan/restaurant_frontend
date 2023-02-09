@@ -1,21 +1,19 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import { authApi } from "../services/authApi";
-import { restaurantApi } from "../services/restaurantApi";
 import authReducer from "./reducers/authReducer";
-import modalReducer from "./reducers/modalReducer";
 
 const rootReducer = combineReducers({
-    authReducer: authReducer,
-    modalReducer: modalReducer,
-    [restaurantApi.reducerPath]: restaurantApi.reducer,
-    [authApi.reducerPath]: authApi.reducer
+    authReducer: authReducer
 });
 
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(restaurantApi.middleware, authApi.middleware)
 });
 
 export type RootState = ReturnType<typeof rootReducer>
+
+type AppDispatch = typeof store.dispatch;
+type DispatchFunc = () => AppDispatch;
+export const useAppDispatch: DispatchFunc = useDispatch;
+
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

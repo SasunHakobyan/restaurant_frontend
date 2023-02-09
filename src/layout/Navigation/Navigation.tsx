@@ -10,13 +10,12 @@ import {authSlice} from "../../store/reducers/authReducer";
 
 interface INavigationProps {
     isLoggedIn: boolean;
-    toggleModal: (showModal: boolean) => void;
 }
 
 const Navigation = (props: INavigationProps) => {
     const dispatch = useDispatch();
 
-    const onProfileButtonClick = () => props.toggleModal(true)
+    const onProfileButtonClick = () => dispatch(authSlice.actions.setShowModal(true))
     const onLogoutButtonClick = () => {
         dispatch(authSlice.actions.logout());
     }

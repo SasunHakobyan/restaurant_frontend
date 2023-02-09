@@ -1,26 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import axios from "axios";
+import {IUserAuth} from "../models/user";
 
-interface IUser {
-    username: string;
-    password: string;
-}
-
-interface IAuthResponse {
-    accessToken: string;
-}
-
-export const authApi = createApi({
-    reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/api/auth'}),
-    endpoints: (build) => ({
-        login: build.mutation<IAuthResponse, IUser> ({
-            query: (data) => ({
-                method: 'POST',
-                url: '/signin',
-                body: data
-            }),
-        })
-    })
+const instance = axios.create({
+    baseURL: 'http://localhost:5000/api/auth'
 });
 
-export const {useLoginMutation} = authApi;
+export const authApi = {
+    async login(data: IUserAuth) {
+        return instance.post('/signin', data);
+    }
+}
