@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, FormEventHandler, useState} from 'react';
+import React from 'react';
 import Modal from "../../layout/Modal/Modal";
 import {authSlice} from "../../store/reducers/authReducer";
 import {IUser} from "../../models/user";
@@ -14,7 +14,7 @@ interface IAuthModalProps {
 
 const AuthModal = (props: IAuthModalProps) => {
     const dispatch = useDispatch();
-    const [login, result] = useLoginMutation();
+    const [loginApi] = useLoginMutation();
 
     const {
         register,
@@ -30,12 +30,12 @@ const AuthModal = (props: IAuthModalProps) => {
             username: data.username
         }
 
-        await login({
+        const {accessToken} = await loginApi({
             username: data.username,
             password: data.password
         }).unwrap();
 
-        console.log(result);
+        localStorage.setItem('authToken', accessToken);
 
         dispatch(authSlice.actions.login(user));
         dispatch(modalSlice.actions.setShowModal(false));
