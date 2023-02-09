@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser, IUserAuth} from "../../models/user";
 import {authApi} from "../../services/authApi";
 import {AxiosError} from "axios";
+import {stat} from "fs";
 
 interface IAuthState {
     showModal: boolean;
@@ -34,6 +35,20 @@ export const loginUser = createAsyncThunk<{accessToken: string}, IUserAuth, {rej
         } catch (err: unknown) {
             if (err instanceof AxiosError) {
                 return rejectWithValue(err?.response?.data as UserNotFoundError);
+            }
+        }
+    }
+)
+
+export const authMe = createAsyncThunk(
+    'auth/me',
+    async (arg, {rejectWithValue}) => {
+        try {
+            const response = await authApi.authMe();
+            return response.data;
+        } catch (err: unknown) {
+            if (err instanceof AxiosError) {
+                return rejectWithValue(err?.response?.data);
             }
         }
     }
@@ -74,6 +89,13 @@ export const authSlice = createSlice({
             .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload?.message || null;
+            })
+
+        builder
+            .addCase(authMe.fulfilled, (state, action) => {
+            })
+            .addCase(authMe.rejected, (state, action) => {
+                state.error = 'Unauthorized';
             })
     }
 });

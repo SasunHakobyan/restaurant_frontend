@@ -8,5 +8,15 @@ const instance = axios.create({
 export const authApi = {
     async login(data: IUserAuth) {
         return instance.post('/signin', data);
+    },
+
+    async authMe() {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.post('/me', {}, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        })
     }
 }

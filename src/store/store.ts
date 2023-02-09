@@ -2,10 +2,12 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import authReducer from "./reducers/authReducer";
 import restaurantReducer from "./reducers/restaurantReducer";
+import mealReducer from "./reducers/mealReducer";
 
 const rootReducer = combineReducers({
     authReducer: authReducer,
-    restaurantReducer: restaurantReducer
+    restaurantReducer: restaurantReducer,
+    mealReducer: mealReducer
 });
 
 export const store = configureStore({

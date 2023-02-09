@@ -14,7 +14,7 @@ const HomePage = () => {
             <div>
                 <h2 className={styles.dealText}>Deals</h2>
             </div>
-            <MealGrid/>
+
         </MainContent>
     );
 };
