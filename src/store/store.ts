@@ -1,9 +1,11 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import authReducer from "./reducers/authReducer";
+import restaurantReducer from "./reducers/restaurantReducer";
 
 const rootReducer = combineReducers({
-    authReducer: authReducer
+    authReducer: authReducer,
+    restaurantReducer: restaurantReducer
 });
 
 export const store = configureStore({

@@ -1,16 +1,20 @@
-import React from 'react';
-import styles from './RestaurantPage.module.css';
+import React, {useEffect} from 'react';
 import MainContent from "../../layout/MainContent/MainContent";
 import RestaurantGrid from "../../components/RestaurantGrid/RestaurantGrid";
-import { useGetRestaurantsQuery } from '../../services/restaurantApi';
+import {useAppDispatch, useAppSelector} from "../../store/store";
+import {fillRestaurants} from "../../store/reducers/restaurantReducer";
 
 const RestaurantsPage = () => {
-    const {data, error, isLoading} = useGetRestaurantsQuery();
-    console.log(data);
+    const dispatch = useAppDispatch();
+    const {restaurants} = useAppSelector(state => state.restaurantReducer);
+
+    useEffect(() => {
+        dispatch(fillRestaurants())
+    }, [])
 
     return (
         <MainContent>
-            <RestaurantGrid/>
+            <RestaurantGrid restaurants={restaurants} />
         </MainContent>
     );
 };

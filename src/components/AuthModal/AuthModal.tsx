@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from "../../layout/Modal/Modal";
-import {authSlice, loginUser} from "../../store/reducers/authReducer";
+import {loginUser} from "../../store/reducers/authReducer";
 import {IUser, IUserAuth} from "../../models/user";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import styles from './AuthModal.module.css';

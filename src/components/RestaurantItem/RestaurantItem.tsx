@@ -1,18 +1,20 @@
 import React from 'react';
 import styles from './RestaurantItem.module.css';
-import restaurantImg from '../../assets/restaurantItem.webp';
+import {IRestaurant} from "../../models/restaurant";
 
-const RestaurantItem = () => {
+interface IRestaurantItemProps {
+    restaurant: IRestaurant;
+}
+
+const RestaurantItem = (props: IRestaurantItemProps) => {
     return (
         <div className={styles.itemContainer}>
             <div>
-                <img className={styles.restImg} src={restaurantImg} />
+                <img className={styles.restImg} src={props.restaurant.imgUrl} />
             </div>
             <div className={styles.infoContainer}>
-                <h3>7-Eleven (1602 S. Bumby Ave.)</h3>
-                <p>
-                    Affordable Lake Terrace spot, offering Energy, Chips, Cookies & Bakery, Ben & Jerry's, Domestic and more.
-                </p>
+                <h3>{props.restaurant.name}</h3>
+                <p>{props.restaurant.description}</p>
             </div>
         </div>
     );

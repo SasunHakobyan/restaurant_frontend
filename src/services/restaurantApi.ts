@@ -1,22 +1,17 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import axios from "axios";
 
-interface IRestaurant {
-    id: number;
-    name: string;
-    ownerId: number;
-    description: string;
-    imgUrl: string;
-}
-
-export const restaurantApi = createApi({
-    reducerPath: 'restaurantApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/api/restaurant'}),
-    endpoints: (build) => ({
-        getRestaurants: build.query<IRestaurant[], void>({
-            query: () => '',
-
-        })
-    })
+const instance = axios.create({
+    baseURL: 'http://localhost:5000/api/restaurant'
 });
 
-export const {useGetRestaurantsQuery} = restaurantApi;
+export const restaurantApi = {
+    async getAll() {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.get('', {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    }
+}

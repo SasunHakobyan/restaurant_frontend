@@ -1,15 +1,18 @@
 import React from 'react';
 import styles from './RestaurantGrid.module.css';
 import RestaurantItem from "../RestaurantItem/RestaurantItem";
+import {IRestaurant} from "../../models/restaurant";
 
-const RestaurantGrid = () => {
+interface IProps {
+    restaurants: IRestaurant[] | null
+}
+
+const RestaurantGrid = (props: IProps) => {
     return (
         <div className={styles.grid}>
-            <RestaurantItem/>
-            <RestaurantItem/>
-            <RestaurantItem/>
-            <RestaurantItem/>
-            <RestaurantItem/>
+            {props.restaurants?.map(restaurant => {
+                return <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+            })}
         </div>
     );
 };

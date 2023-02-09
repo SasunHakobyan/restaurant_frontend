@@ -12,6 +12,7 @@ import MealsPage from "./pages/MealsPage/MealsPage";
 function App() {
     const authState = useAppSelector(state => state.authReducer);
 
+
     return (
         <div className='app'>
             {!authState.isLoggedIn && authState.showModal && <AuthModal />}
