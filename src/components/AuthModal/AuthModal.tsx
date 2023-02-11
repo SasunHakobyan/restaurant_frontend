@@ -1,14 +1,12 @@
-import React from 'react';
 import Modal from "../../layout/Modal/Modal";
-import {loginUser} from "../../store/reducers/authReducer";
-import {IUser, IUserAuth} from "../../models/user";
-import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
+import { loginUser } from "../../store/reducers/authReducer";
+import { IUser, IUserAuth } from "../../models/user";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import styles from './AuthModal.module.css';
-import {useAppDispatch, useAppSelector} from "../../store/store";
+import { useAppDispatch } from "../../store/store";
 
 const AuthModal = () => {
     const dispatch = useAppDispatch();
-    const authState = useAppSelector(state => state.authReducer);
 
     const {
         register,
@@ -34,7 +32,6 @@ const AuthModal = () => {
     return (
         <Modal>
             <form onSubmit={handleSubmit(formSubmitHandler)}>
-                {authState.error && <div className={styles.formError}>{authState.error}</div>}
                 <div className={styles.formControl}>
                     <label>Username</label>
                     <input {...register('username', {
@@ -43,7 +40,7 @@ const AuthModal = () => {
                             value: 4,
                             message: 'Username length must be minimum 4'
                         }
-                    })}/>
+                    })} />
                     {errors?.username && <span className={styles.errorMsg}>{errors?.username?.message?.toString()}</span>}
                 </div>
                 <div className={styles.formControl}>
@@ -54,7 +51,7 @@ const AuthModal = () => {
                             value: 4,
                             message: 'Password length must be minimum 4'
                         }
-                    })}/>
+                    })} />
                     {errors?.password && <span className={styles.errorMsg}>{errors?.password?.message?.toString()}</span>}
                 </div>
                 <button className={styles.submitBtn} type='submit'>Login</button>

@@ -1,5 +1,4 @@
 .navigation {
-    width: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,4 +36,10 @@
 
 svg path {
     fill: #FA6400;
+}
+
+@media only screen and (max-width: 1200px) {
+    .navigation {
+        width: 100px
+    }
 }

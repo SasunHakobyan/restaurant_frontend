@@ -1,8 +1,7 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IUser, IUserAuth} from "../../models/user";
-import {authApi} from "../../services/authApi";
-import {AxiosError} from "axios";
-import {stat} from "fs";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IUser, IUserAuth } from "../../models/user";
+import { authApi } from "../../services/authApi";
+import { AxiosError } from "axios";
 
 interface IAuthState {
     showModal: boolean;
@@ -26,9 +25,9 @@ const initialState: IAuthState = {
     user: null
 }
 
-export const loginUser = createAsyncThunk<{accessToken: string}, IUserAuth, {rejectValue: UserNotFoundError}>(
+export const loginUser = createAsyncThunk<{ accessToken: string }, IUserAuth, { rejectValue: UserNotFoundError }>(
     'auth/signin',
-    async (data: IUserAuth, {rejectWithValue}) => {
+    async (data: IUserAuth, { rejectWithValue }) => {
         try {
             const response = await authApi.login(data);
             return response.data;
@@ -42,12 +41,14 @@ export const loginUser = createAsyncThunk<{accessToken: string}, IUserAuth, {rej
 
 export const authMe = createAsyncThunk(
     'auth/me',
-    async (arg, {rejectWithValue}) => {
+    async (arg, { rejectWithValue }) => {
         try {
             const response = await authApi.authMe();
             return response.data;
         } catch (err: unknown) {
             if (err instanceof AxiosError) {
+                console.log(err?.response?.data);
+
                 return rejectWithValue(err?.response?.data);
             }
         }
@@ -81,7 +82,7 @@ export const authSlice = createSlice({
                 state.isLoggedIn = true;
                 state.isLoading = false;
                 state.error = null;
-                state.user = {username: action.meta.arg.username};
+                state.user = { username: action.meta.arg.username };
                 state.showModal = false;
 
                 localStorage.setItem('authToken', action.payload.accessToken);
@@ -93,6 +94,8 @@ export const authSlice = createSlice({
 
         builder
             .addCase(authMe.fulfilled, (state, action) => {
+                state.isLoggedIn = true;
+                state.user = { username: action.payload.username };
             })
             .addCase(authMe.rejected, (state, action) => {
                 state.error = 'Unauthorized';
