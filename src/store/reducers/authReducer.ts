@@ -25,7 +25,11 @@ const initialState: IAuthState = {
     user: null
 }
 
-export const loginUser = createAsyncThunk<{ accessToken: string }, IUserAuth, { rejectValue: UserNotFoundError }>(
+export const loginUser = createAsyncThunk<
+    { user: IUser, accessToken: string },
+    IUserAuth,
+    { rejectValue: UserNotFoundError }
+>(
     'auth/signin',
     async (data: IUserAuth, { rejectWithValue }) => {
         try {
@@ -47,8 +51,6 @@ export const authMe = createAsyncThunk(
             return response.data;
         } catch (err: unknown) {
             if (err instanceof AxiosError) {
-                console.log(err?.response?.data);
-
                 return rejectWithValue(err?.response?.data);
             }
         }
@@ -65,8 +67,9 @@ export const authSlice = createSlice({
         },
 
         logout(state) {
-            state.isLoggedIn = false;
-            state.user = null;
+            localStorage.removeItem('authToken');
+
+            state = initialState;
         },
 
         setShowModal(state, action: PayloadAction<boolean>) {
@@ -82,7 +85,13 @@ export const authSlice = createSlice({
                 state.isLoggedIn = true;
                 state.isLoading = false;
                 state.error = null;
-                state.user = { username: action.meta.arg.username };
+
+                state.user = {
+                    id: action.payload.user.id,
+                    username: action.payload.user.username,
+                    role: action.payload.user.role
+                };
+
                 state.showModal = false;
 
                 localStorage.setItem('authToken', action.payload.accessToken);
@@ -95,7 +104,11 @@ export const authSlice = createSlice({
         builder
             .addCase(authMe.fulfilled, (state, action) => {
                 state.isLoggedIn = true;
-                state.user = { username: action.payload.username };
+                state.user = {
+                    id: action.payload.id,
+                    username: action.payload.username,
+                    role: action.payload.role
+                }
             })
             .addCase(authMe.rejected, (state, action) => {
                 state.error = 'Unauthorized';

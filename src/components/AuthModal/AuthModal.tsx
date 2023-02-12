@@ -17,10 +17,6 @@ const AuthModal = () => {
     } = useForm();
 
     const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
-        const user: IUser = {
-            username: data.username
-        }
-
         const reqBody: IUserAuth = {
             username: data.username,
             password: data.password

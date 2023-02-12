@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Navigation.module.css';
 
 import restaurantLogo from '../../assets/logos/restaurant.svg';

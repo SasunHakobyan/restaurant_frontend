@@ -9,6 +9,9 @@ import { useAppDispatch, useAppSelector } from "./store/store";
 import RestaurantsPage from "./pages/RestaurantsPage/RestaurantsPage";
 import MealsPage from "./pages/MealsPage/MealsPage";
 import { authMe } from "./store/reducers/authReducer";
+import { ProtectAuth } from './hoc/ProtectAuth';
+import AddRestaurant from './pages/AddRestaurant/AddRestaurant';
+import EditRestaurant from './pages/EditRestaurant/EditRestaurant';
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -24,8 +27,18 @@ function App() {
             <Navigation isLoggedIn={authState.isLoggedIn} />
             <Routes>
                 <Route path='/' element={<HomePage />} />
-                <Route path='/restaurants' element={<RestaurantsPage />} />
-                <Route path='/meals' element={<MealsPage />} />
+                <Route path='/add-restaurant' element={<AddRestaurant />} />
+                <Route path='/edit-restaurant/:restaurantId' element={<EditRestaurant />} />
+                <Route path='/restaurants' element={
+                    <ProtectAuth>
+                        <RestaurantsPage />
+                    </ProtectAuth>
+                } />
+                <Route path='/meals' element={
+                    <ProtectAuth>
+                        <MealsPage />
+                    </ProtectAuth>
+                } />
             </Routes>
         </div>
     );
