@@ -1,57 +1,41 @@
 import Modal from "../../layout/Modal/Modal";
-import { loginUser } from "../../store/reducers/authReducer";
-import { IUser, IUserAuth } from "../../models/user";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import SignForm from "../SignForm/SignForm";
 import styles from './AuthModal.module.css';
-import { useAppDispatch } from "../../store/store";
+import React, {Ref, useRef, useState} from "react";
+import classNames from "classnames";
+
+export enum UserSign {
+    SignIn = 'signIn',
+    SignUp = 'signUp'
+}
 
 const AuthModal = () => {
-    const dispatch = useAppDispatch();
+    const [option, changeOption] = useState(UserSign.SignIn);
 
-    const {
-        register,
-        formState: {
-            errors,
-        },
-        handleSubmit
-    } = useForm();
-
-    const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
-        const reqBody: IUserAuth = {
-            username: data.username,
-            password: data.password
-        }
-
-        dispatch(loginUser(reqBody));
+    const changeOptionHandler = (option: UserSign) => {
+        changeOption(option);
     }
+
+    const loginClassNames = classNames(
+        styles.toggleBtn,
+        styles.loginToggle,
+        {[styles.activeToggle]: option === UserSign.SignIn}
+    );
+
+    const registerClassNames = classNames(
+        styles.toggleBtn,
+        styles.registerToggle,
+        {[styles.activeToggle]: option === UserSign.SignUp}
+    );
 
     return (
         <Modal>
-            <form onSubmit={handleSubmit(formSubmitHandler)}>
-                <div className={styles.formControl}>
-                    <label>Username</label>
-                    <input {...register('username', {
-                        required: 'Username is required',
-                        minLength: {
-                            value: 4,
-                            message: 'Username length must be minimum 4'
-                        }
-                    })} />
-                    {errors?.username && <span className={styles.errorMsg}>{errors?.username?.message?.toString()}</span>}
-                </div>
-                <div className={styles.formControl}>
-                    <label>Password</label>
-                    <input {...register('password', {
-                        required: 'Password is required',
-                        minLength: {
-                            value: 4,
-                            message: 'Password length must be minimum 4'
-                        }
-                    })} />
-                    {errors?.password && <span className={styles.errorMsg}>{errors?.password?.message?.toString()}</span>}
-                </div>
-                <button className={styles.submitBtn} type='submit'>Login</button>
-            </form>
+            <div className={styles.formToggle}>
+                <button onClick={() => changeOptionHandler(UserSign.SignIn)} className={loginClassNames}>Login</button>
+                <button onClick={() => changeOptionHandler(UserSign.SignUp)} className={registerClassNames}>Register</button>
+            </div>
+
+            <SignForm signType={option}/>
         </Modal>
     );
 };

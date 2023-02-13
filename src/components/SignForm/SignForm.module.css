@@ -1,0 +1,36 @@
+.formError {
+    margin: 0.5rem 0;
+    background-color: red;
+    color: white;
+    padding: .5rem;
+}
+
+.formControl {
+    display: flex;
+    flex-direction: column;
+    margin: .75rem 0;
+}
+
+.formControl label {
+    margin-bottom: .25rem;
+}
+
+.formControl input {
+    padding: 3px;
+    font-size: 18px;
+    outline: none;
+}
+
+.errorMsg {
+    margin-top: 5px;
+    color: red;
+}
+
+.submitBtn {
+    border-radius: 3px;
+    padding: .75rem;
+    border: none;
+    color: white;
+    background-color: #FA6400;
+    cursor: pointer;
+}

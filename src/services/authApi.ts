@@ -10,6 +10,10 @@ export const authApi = {
         return instance.post('/signin', data);
     },
 
+    async register(data: IUserAuth) {
+        return instance.post('/signup', data);
+    },
+
     async authMe() {
         const authToken = localStorage.getItem('authToken');
 

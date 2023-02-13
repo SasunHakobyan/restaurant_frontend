@@ -1,36 +1,29 @@
-.formError {
-    margin: 0.5rem 0;
-    background-color: red;
-    color: white;
-    padding: .5rem;
-}
-
-.formControl {
+.formToggle {
     display: flex;
-    flex-direction: column;
-    margin: .75rem 0;
+    justify-content: center;
+    align-items: center;
 }
 
-.formControl label {
-    margin-bottom: .25rem;
-}
-
-.formControl input {
-    padding: 3px;
-    font-size: 18px;
+.toggleBtn {
+    padding: 1rem;
+    border: none;
+    background-color: #FA6400;
+    color: white;
+    font-size: .75rem;
+    cursor: pointer;
     outline: none;
 }
 
-.errorMsg {
-    margin-top: 5px;
-    color: red;
+.loginToggle {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
-.submitBtn {
-    border-radius: 3px;
-    padding: .75rem;
-    border: none;
-    color: white;
-    background-color: #FA6400;
-    cursor: pointer;
+.registerToggle {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.activeToggle {
+    background-color: #ae4500;
 }
