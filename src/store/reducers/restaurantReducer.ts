@@ -5,12 +5,18 @@ import { IRestaurant } from "../../models/restaurant";
 
 interface IRestaurantState {
     restaurants: IRestaurant[] | null;
-    restaurantFormData: IAddRestaurant | null;
+    restaurantFormData: IAddRestaurant;
+    saved: boolean;
 }
 
 const initialState: IRestaurantState = {
     restaurants: null,
-    restaurantFormData: null
+    restaurantFormData: {
+        name: '',
+        description: '',
+        imgUrl: ''
+    },
+    saved: false
 }
 
 export const fillRestaurants = createAsyncThunk(
@@ -29,7 +35,7 @@ export const addRestaurant = createAsyncThunk(
     'restaurant/add',
     async (data: IAddRestaurant, { rejectWithValue }) => {
         try {
-            const response = await restaurantApi.addRestaurant(data);
+            const response = await restaurantApi.addRestaurant
             console.log(response);
         } catch (err: unknown) {
             rejectWithValue(err);
@@ -41,7 +47,8 @@ export const getRestaurantFormData = createAsyncThunk(
     'restaurant/getFormData',
     async (id: number, { rejectWithValue }) => {
         try {
-
+            const response = await restaurantApi.findRestaurant(id);
+            return response.data;
         } catch (err) {
             rejectWithValue(err);
         }
@@ -68,9 +75,20 @@ export const restaurantSlice = createSlice({
 
         builder
             .addCase(addRestaurant.fulfilled, (state, action) => {
-
+                state.saved = true;
             })
             .addCase(addRestaurant.rejected, (state, action) => {
+            })
+
+        builder
+            .addCase(getRestaurantFormData.fulfilled, (state, action) => {
+                state.restaurantFormData = {
+                    name: action.payload.name,
+                    description: action.payload.description,
+                    imgUrl: action.payload.imgUrl
+                }
+            })
+            .addCase(getRestaurantFormData.rejected, (state, action) => {
             })
     }
 });

@@ -2,9 +2,18 @@ import styles from './EditRestaurant.module.css';
 import MainContent from '../../layout/MainContent/MainContent';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
+import {useEffect} from "react";
+import {useAppDispatch, useAppSelector} from "../../store/store";
+import {getRestaurantFormData} from "../../store/reducers/restaurantReducer";
 
 const EditRestaurant = () => {
+	const dispatch = useAppDispatch();
+	const {restaurantFormData} = useAppSelector(state => state.restaurantReducer);
 	const params = useParams();
+
+	useEffect(() => {
+		dispatch(getRestaurantFormData(Number(params.restaurantId)))
+	}, []);
 
 	const {
 		register,
@@ -26,7 +35,7 @@ const EditRestaurant = () => {
 			)}>
 				<div className={styles.formControl}>
 					<label>Name</label>
-					<input {
+					<input defaultValue={restaurantFormData.name} {
 						...register('name', {
 							required: 'Name is required',
 						})
@@ -34,7 +43,7 @@ const EditRestaurant = () => {
 				</div>
 				<div className={styles.formControl}>
 					<label>Description</label>
-					<input {
+					<textarea defaultValue={restaurantFormData.description} {
 						...register('description', {
 							required: 'Description is required',
 						})
@@ -42,7 +51,7 @@ const EditRestaurant = () => {
 				</div>
 				<div className={styles.formControl}>
 					<label>Img Url</label>
-					<input {
+					<input defaultValue={restaurantFormData.imgUrl} {
 						...register('imgUrl', {
 							required: 'imgUrl is required',
 						})

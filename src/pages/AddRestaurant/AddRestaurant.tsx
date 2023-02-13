@@ -2,11 +2,14 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import MainContent from '../../layout/MainContent/MainContent';
 import { IAddRestaurant } from '../../models/restaurant';
 import { addRestaurant } from '../../store/reducers/restaurantReducer';
-import { useAppDispatch } from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import styles from './AddRestaurant.module.css';
+import {useNavigate} from "react-router-dom";
 
 const AddRestaurant = () => {
+	const restaurantState = useAppSelector(state => state.restaurantReducer);
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -15,6 +18,10 @@ const AddRestaurant = () => {
 		},
 		handleSubmit
 	} = useForm();
+
+	if (restaurantState.saved) {
+		navigate('/');
+	}
 
 	const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
 		const reqBody: IAddRestaurant = {
@@ -30,7 +37,7 @@ const AddRestaurant = () => {
 	return (
 		<MainContent>
 			<h3>Add Restaurant</h3>
-			<form onSubmit={handleSubmit(
+			<form className={styles.form} onSubmit={handleSubmit(
 				formSubmitHandler
 			)}>
 				<div className={styles.formControl}>
@@ -43,7 +50,7 @@ const AddRestaurant = () => {
 				</div>
 				<div className={styles.formControl}>
 					<label>Description</label>
-					<input {
+					<textarea {
 						...register('description', {
 							required: 'Description is required',
 						})
