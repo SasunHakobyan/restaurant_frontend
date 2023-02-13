@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import MainContent from "../../layout/MainContent/MainContent";
 import RestaurantGrid from "../../components/RestaurantGrid/RestaurantGrid";
 import {useAppDispatch, useAppSelector} from "../../store/store";
-import {fillRestaurants} from "../../store/reducers/restaurantReducer";
+import {fillRestaurants} from "../../store/thunk/restaurant/fillRestaurants";
 
 const RestaurantsPage = () => {
     const dispatch = useAppDispatch();

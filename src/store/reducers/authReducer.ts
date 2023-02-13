@@ -1,23 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../models/user";
+import {IUser, RoleValue} from "../../models/user";
 import {loginUser} from "../thunk/auth/loginUser";
 import {authMe} from "../thunk/auth/authMe";
 import {registerUser} from "../thunk/auth/registerUser";
 
+export enum UserSign {
+    SignIn = 'signIn',
+    SignUp = 'signUp'
+}
+
 interface IAuthState {
     showModal: boolean;
+    authFormOption: UserSign;
     isLoading: boolean;
     error: string | null;
     isLoggedIn: boolean;
-    user: IUser | null
+    user: IUser;
 }
 
 const initialState: IAuthState = {
+    authFormOption: UserSign.SignIn,
     showModal: false,
     isLoading: false,
     error: null,
     isLoggedIn: false,
-    user: null
+    user: {
+        id: 0,
+        username: '',
+        role: {value: RoleValue.User},
+    }
 }
 
 export const authSlice = createSlice({
@@ -32,11 +43,16 @@ export const authSlice = createSlice({
         logout(state) {
             localStorage.removeItem('authToken');
 
+            state.isLoggedIn = false;
             state = initialState;
         },
 
         setShowModal(state, action: PayloadAction<boolean>) {
             state.showModal = action.payload;
+        },
+
+        setFormOption(state, action: PayloadAction<UserSign>) {
+            state.authFormOption = action.payload;
         }
     },
     extraReducers: (builder) => {

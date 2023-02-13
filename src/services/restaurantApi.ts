@@ -24,6 +24,14 @@ export const restaurantApi = {
         })
     },
 
+    async editRestaurant(restaurantId: number, data: IAddRestaurant) {
+        return instance.patch(`/${restaurantId}`, data, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
     async findRestaurant(id: number) {
         return instance.get(`/${id}`, {
             headers: {

@@ -1,31 +1,29 @@
 import Modal from "../../layout/Modal/Modal";
 import SignForm from "../SignForm/SignForm";
 import styles from './AuthModal.module.css';
-import React, {Ref, useRef, useState} from "react";
+import React from "react";
 import classNames from "classnames";
-
-export enum UserSign {
-    SignIn = 'signIn',
-    SignUp = 'signUp'
-}
+import {authSlice, UserSign} from "../../store/reducers/authReducer";
+import {useAppDispatch, useAppSelector} from "../../store/store";
 
 const AuthModal = () => {
-    const [option, changeOption] = useState(UserSign.SignIn);
+    const dispatch = useAppDispatch();
+    const authState = useAppSelector(state => state.authReducer);
 
     const changeOptionHandler = (option: UserSign) => {
-        changeOption(option);
+        dispatch(authSlice.actions.setFormOption(option));
     }
 
     const loginClassNames = classNames(
         styles.toggleBtn,
         styles.loginToggle,
-        {[styles.activeToggle]: option === UserSign.SignIn}
+        {[styles.activeToggle]: authState.authFormOption === UserSign.SignIn}
     );
 
     const registerClassNames = classNames(
         styles.toggleBtn,
         styles.registerToggle,
-        {[styles.activeToggle]: option === UserSign.SignUp}
+        {[styles.activeToggle]: authState.authFormOption === UserSign.SignUp}
     );
 
     return (
@@ -35,7 +33,7 @@ const AuthModal = () => {
                 <button onClick={() => changeOptionHandler(UserSign.SignUp)} className={registerClassNames}>Register</button>
             </div>
 
-            <SignForm signType={option}/>
+            <SignForm signType={authState.authFormOption}/>
         </Modal>
     );
 };

@@ -6,12 +6,12 @@
 
 .toggleBtn {
     padding: 1rem;
-    border: none;
-    background-color: #FA6400;
-    color: white;
+    background-color: white;
+    color: black;
     font-size: .75rem;
     cursor: pointer;
     outline: none;
+    border: 1px solid black;
 }
 
 .loginToggle {
@@ -25,5 +25,6 @@
 }
 
 .activeToggle {
-    background-color: #ae4500;
+    background-color: #f2b000;
+    border: none;
 }

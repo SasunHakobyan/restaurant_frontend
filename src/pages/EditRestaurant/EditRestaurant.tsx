@@ -1,18 +1,20 @@
 import styles from './EditRestaurant.module.css';
 import MainContent from '../../layout/MainContent/MainContent';
-import { useForm } from 'react-hook-form';
+import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../store/store";
 import {getRestaurantFormData} from "../../store/reducers/restaurantReducer";
+import {IAddRestaurant} from "../../models/restaurant";
+import {editRestaurant} from "../../store/thunk/restaurant/editRestaurant";
 
 const EditRestaurant = () => {
 	const dispatch = useAppDispatch();
 	const {restaurantFormData} = useAppSelector(state => state.restaurantReducer);
-	const params = useParams();
+	const {restaurantId} = useParams<{restaurantId?: string}>();
 
 	useEffect(() => {
-		dispatch(getRestaurantFormData(Number(params.restaurantId)))
+		dispatch(getRestaurantFormData(Number(restaurantId)))
 	}, []);
 
 	const {
@@ -23,8 +25,14 @@ const EditRestaurant = () => {
 		handleSubmit
 	} = useForm();
 
-	const formSubmitHandler = () => {
+	const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
+		const reqBody: IAddRestaurant = {
+			name: data.name,
+			description: data.description,
+			imgUrl: data.imgUrl
+		};
 
+		dispatch(editRestaurant({restaurantId: Number(restaurantId), restaurant: reqBody}))
 	}
 
 	return (

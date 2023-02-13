@@ -1,10 +1,10 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import MainContent from '../../layout/MainContent/MainContent';
 import { IAddRestaurant } from '../../models/restaurant';
-import { addRestaurant } from '../../store/reducers/restaurantReducer';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import styles from './AddRestaurant.module.css';
 import {useNavigate} from "react-router-dom";
+import {addRestaurant} from "../../store/thunk/restaurant/addRestaurant";
 
 const AddRestaurant = () => {
 	const restaurantState = useAppSelector(state => state.restaurantReducer);

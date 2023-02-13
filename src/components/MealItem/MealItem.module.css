@@ -1,33 +1,35 @@
 .cardContainer {
-    margin-right: 1.5rem;
-    margin-bottom: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 .productImg {
     border-radius: 5px;
     width: 100%;
+    height: 180px;
 }
 
-.mainInfoContainer {
+.infoContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: .75rem;
+    flex-direction: column;
+    align-items: center;
 }
 
-.productTitle {
-    font-size: 18px;
-    font-family: "Segoe UI", serif;
-    font-weight: 500;
+.mealTitle {
+    margin-top: .5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
 }
 
-.productPrice {
-    font-size: 20px;
-    font-weight: 500;
+.mealDescription {
+    margin: .75rem 0;
+    font-size: .9rem;
+    font-weight: bold;
+    color: dimgray;
 }
 
-.description {
-    margin-top: .25rem;
-    color: #AAAAAA;
-    font-weight: 600;
+.mealPrice {
+    font-size: 1.5rem;
+    color: #FFCB3F;
 }

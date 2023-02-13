@@ -1,7 +1,9 @@
-import { IAddRestaurant } from './../../models/restaurant';
+import { IAddRestaurant } from '../../models/restaurant';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { restaurantApi } from "../../services/restaurantApi";
 import { IRestaurant } from "../../models/restaurant";
+import {fillRestaurants} from "../thunk/restaurant/fillRestaurants";
+import {addRestaurant} from "../thunk/restaurant/addRestaurant";
 
 interface IRestaurantState {
     restaurants: IRestaurant[] | null;
@@ -18,30 +20,6 @@ const initialState: IRestaurantState = {
     },
     saved: false
 }
-
-export const fillRestaurants = createAsyncThunk(
-    'restaurant/getAll',
-    async () => {
-        try {
-            const response = await restaurantApi.getAll();
-            return response.data;
-        } catch (err) {
-
-        }
-    }
-)
-
-export const addRestaurant = createAsyncThunk(
-    'restaurant/add',
-    async (data: IAddRestaurant, { rejectWithValue }) => {
-        try {
-            const response = await restaurantApi.addRestaurant
-            console.log(response);
-        } catch (err: unknown) {
-            rejectWithValue(err);
-        }
-    }
-)
 
 export const getRestaurantFormData = createAsyncThunk(
     'restaurant/getFormData',

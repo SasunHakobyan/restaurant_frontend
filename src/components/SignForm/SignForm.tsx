@@ -3,9 +3,9 @@ import styles from './SignForm.module.css';
 import {useAppDispatch, useAppSelector} from "../../store/store";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {IUserAuth} from "../../models/user";
-import {UserSign} from "../AuthModal/AuthModal";
 import {loginUser} from "../../store/thunk/auth/loginUser";
 import {registerUser} from "../../store/thunk/auth/registerUser";
+import {UserSign} from "../../store/reducers/authReducer";
 
 interface ISignFormProps {
     signType: UserSign
