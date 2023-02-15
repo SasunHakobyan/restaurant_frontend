@@ -10,13 +10,14 @@ import { ProtectAuth } from './hoc/ProtectAuth';
 import AddRestaurantPage from './pages/OwnerPages/AddRestaurantPage/AddRestaurantPage';
 import EditRestaurantPage from './pages/OwnerPages/EditRestaurantPage/EditRestaurantPage';
 import {authMe} from "./store/thunk/auth/authMe";
-import AddOwnerPage from "./pages/AdminPages/AddOwnerPage/AddOwnerPage";
+import AddOwnerPage from "./pages/AdminPages/OwnersPage/AddOwnerPage/AddOwnerPage";
 import ProtectOwner from "./hoc/ProtectOwner";
 import ProtectAdmin from "./hoc/ProtectAdmin";
 import HomePage from "./pages/UserPages/HomePage/HomePage";
 import MealsPage from "./pages/UserPages/MealsPage/MealsPage";
 import InfoModal from "./components/InfoModal/InfoModal";
 import AdminHomePage from "./pages/AdminPages/AdminHomePage/AdminHomePage";
+import OwnersPage from "./pages/AdminPages/OwnersPage/OwnersPage";
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -48,6 +49,11 @@ function App() {
                 <Route path='/admin' element={
                     <ProtectAdmin>
                         <AdminHomePage/>
+                    </ProtectAdmin>
+                }/>
+                <Route path='/admin/owners' element={
+                    <ProtectAdmin>
+                        <OwnersPage/>
                     </ProtectAdmin>
                 }/>
                 <Route path='/admin/add-owner' element={

@@ -4,9 +4,11 @@ import authReducer from "./reducers/authReducer";
 import restaurantReducer from "./reducers/restaurantReducer";
 import mealReducer from "./reducers/mealReducer";
 import modalReducer from "./reducers/modalReducer";
+import adminReducer from "./reducers/adminReducer";
 
 const rootReducer = combineReducers({
     authReducer: authReducer,
+    adminReducer: adminReducer,
     restaurantReducer: restaurantReducer,
     mealReducer: mealReducer,
     modalReducer: modalReducer,

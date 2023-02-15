@@ -5,7 +5,7 @@ import mealLogo from '../../assets/logos/meal.svg';
 import homeLogo from '../../assets/logos/home.svg';
 import profileLogo from '../../assets/logos/profile.png'
 
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {authSlice} from "../../store/reducers/authReducer";
 import {useAppSelector} from "../../store/store";
@@ -20,6 +20,7 @@ interface INavigationProps {
 const Navigation = (props: INavigationProps) => {
     const dispatch = useDispatch();
     const authState = useAppSelector(state => state.authReducer);
+    const navigate = useNavigate();
 
     const onProfileButtonClick = (option: UserSign) => {
         dispatch(authSlice.actions.setShowModal(true));
@@ -28,6 +29,7 @@ const Navigation = (props: INavigationProps) => {
 
     const onLogoutButtonClick = () => {
         dispatch(authSlice.actions.logout());
+        navigate('/')
     }
 
     const navLinkHandler: MouseEventHandler<HTMLElement> = (e) => {

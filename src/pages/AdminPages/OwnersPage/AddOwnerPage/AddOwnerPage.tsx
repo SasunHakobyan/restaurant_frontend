@@ -1,8 +1,8 @@
 import React from 'react';
-import MainContent from "../../../layout/MainContent/MainContent";
+import MainContent from "../../../../layout/MainContent/MainContent";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {IAddRestaurant} from "../../../models/restaurant";
-import styles from "../../OwnerPages/AddRestaurantPage/AddRestaurant.module.css";
+import {IAddRestaurant} from "../../../../models/restaurant";
+import styles from "../../../OwnerPages/AddRestaurantPage/AddRestaurant.module.css";
 
 const AddOwnerPage = () => {
 
