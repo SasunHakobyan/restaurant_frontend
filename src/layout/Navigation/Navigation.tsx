@@ -7,8 +7,11 @@ import profileLogo from '../../assets/logos/profile.png'
 
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {authSlice, UserSign} from "../../store/reducers/authReducer";
+import {authSlice} from "../../store/reducers/authReducer";
 import {useAppSelector} from "../../store/store";
+import {UserSign} from "../../models/user";
+import {MouseEventHandler} from "react";
+import {modalSlice} from "../../store/reducers/modalReducer";
 
 interface INavigationProps {
     isLoggedIn: boolean;
@@ -25,6 +28,17 @@ const Navigation = (props: INavigationProps) => {
 
     const onLogoutButtonClick = () => {
         dispatch(authSlice.actions.logout());
+    }
+
+    const navLinkHandler: MouseEventHandler<HTMLElement> = (e) => {
+        if (!props.isLoggedIn) {
+            e.preventDefault()
+
+            dispatch(modalSlice.actions.setShowMessage({
+                toggle: true,
+                message: 'Please signIn to see content'
+            }));
+        }
     }
 
     const activeItemStyles = {
@@ -47,6 +61,7 @@ const Navigation = (props: INavigationProps) => {
                 <div className={styles.itemContainer}>
                     <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
                              className={styles.navItem}
+                             onClick={navLinkHandler}
                              to='/restaurants'>
                         <img alt='menu' className={styles.logo} src={restaurantLogo}/>
                         <p className={styles.menuText}>Restaurants</p>
@@ -55,6 +70,7 @@ const Navigation = (props: INavigationProps) => {
                 <div className={styles.itemContainer}>
                     <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
                              className={styles.navItem}
+                             onClick={navLinkHandler}
                              to='/meals'>
                         <img alt='menu' className={styles.logo} src={mealLogo}/>
                         <p className={styles.menuText}>Meals</p>

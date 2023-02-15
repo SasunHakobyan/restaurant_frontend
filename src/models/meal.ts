@@ -1,5 +1,3 @@
-import {IRestaurant} from "./restaurant";
-
 export interface IMeal {
     id: number;
     name: string;

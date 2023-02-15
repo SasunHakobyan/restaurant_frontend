@@ -18,3 +18,8 @@ export interface IUserAuth {
     username: string;
     password: string;
 }
+
+export enum UserSign {
+    SignIn = 'signIn',
+    SignUp = 'signUp'
+}

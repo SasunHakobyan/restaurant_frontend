@@ -1,11 +1,10 @@
 import React from 'react';
 import styles from './SignForm.module.css';
-import {useAppDispatch, useAppSelector} from "../../store/store";
+import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {IUserAuth} from "../../models/user";
-import {loginUser} from "../../store/thunk/auth/loginUser";
-import {registerUser} from "../../store/thunk/auth/registerUser";
-import {UserSign} from "../../store/reducers/authReducer";
+import {IUserAuth, UserSign} from "../../../models/user";
+import {loginUser} from "../../../store/thunk/auth/loginUser";
+import {registerUser} from "../../../store/thunk/auth/registerUser";
 
 interface ISignFormProps {
     signType: UserSign
@@ -38,7 +37,7 @@ const SignForm = (props: ISignFormProps) => {
 
     return (
         <form onSubmit={handleSubmit(formSubmitHandler)}>
-            {authState.error && <div>{authState.error}</div>}
+            {authState.error && <div className={styles.signError}>{authState.error}</div>}
             <div className={styles.formControl}>
                 <label>Username</label>
                 <input {...register('username', {

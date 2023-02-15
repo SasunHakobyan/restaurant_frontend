@@ -1,13 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {IUser, RoleValue} from "../../models/user";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IUser, RoleValue, UserSign} from "../../models/user";
 import {loginUser} from "../thunk/auth/loginUser";
 import {authMe} from "../thunk/auth/authMe";
 import {registerUser} from "../thunk/auth/registerUser";
-
-export enum UserSign {
-    SignIn = 'signIn',
-    SignUp = 'signUp'
-}
 
 interface IAuthState {
     showModal: boolean;
@@ -112,9 +107,6 @@ export const authSlice = createSlice({
                     username: action.payload.username,
                     role: action.payload.role
                 }
-            })
-            .addCase(authMe.rejected, (state, action) => {
-
             })
     }
 });

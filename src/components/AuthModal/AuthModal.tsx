@@ -1,14 +1,19 @@
 import Modal from "../../layout/Modal/Modal";
-import SignForm from "../SignForm/SignForm";
+import SignForm from "./SignForm/SignForm";
 import styles from './AuthModal.module.css';
 import React from "react";
 import classNames from "classnames";
-import {authSlice, UserSign} from "../../store/reducers/authReducer";
+import {authSlice} from "../../store/reducers/authReducer";
 import {useAppDispatch, useAppSelector} from "../../store/store";
+import {UserSign} from "../../models/user";
 
 const AuthModal = () => {
     const dispatch = useAppDispatch();
     const authState = useAppSelector(state => state.authReducer);
+
+    const closeModal = () => {
+        dispatch(authSlice.actions.setShowModal(false))
+    }
 
     const changeOptionHandler = (option: UserSign) => {
         dispatch(authSlice.actions.setFormOption(option));
@@ -27,7 +32,7 @@ const AuthModal = () => {
     );
 
     return (
-        <Modal>
+        <Modal closeModal={closeModal}>
             <div className={styles.formToggle}>
                 <button onClick={() => changeOptionHandler(UserSign.SignIn)} className={loginClassNames}>Login</button>
                 <button onClick={() => changeOptionHandler(UserSign.SignUp)} className={registerClassNames}>Register</button>

@@ -1,0 +1,35 @@
+.form {
+	width: 50%;
+}
+
+.formControl {
+	display: flex;
+	flex-direction: column;
+	margin: .75rem 0;
+}
+
+.formControl label {
+	color: #555555;
+	font-weight: bold;
+	margin-bottom: .25rem;
+}
+
+.formControl input,
+.formControl textarea {
+	box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+
+	padding: 3px;
+	font-size: 18px;
+	outline: none;
+	border: none;
+}
+
+.submitBtn {
+	width: 100%;
+	border-radius: 3px;
+	padding: .75rem;
+	border: none;
+	color: white;
+	background-color: #FFCB3F;
+	cursor: pointer;
+}

@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './RestaurantGrid.module.css';
-import RestaurantItem from "../RestaurantItem/RestaurantItem";
+
 import {IRestaurant} from "../../models/restaurant";
+import RestaurantItem from "../RestaurantItem/RestaurantItem";
 
 interface IProps {
     restaurants: IRestaurant[] | null

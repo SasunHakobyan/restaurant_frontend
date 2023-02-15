@@ -1,20 +1,16 @@
 import React from 'react';
 import styles from './Modal.module.css';
-import {useDispatch} from "react-redux";
-import {authSlice} from "../../store/reducers/authReducer";
 
 interface IModalProps {
     children: React.ReactNode
+    closeModal: () => void
 }
 
 const Modal = (props: IModalProps) => {
-    const dispatch = useDispatch();
-    const closeModal = () => dispatch(authSlice.actions.setShowModal(false));
-
     return (
         <div className={styles.modal}>
             <div className={styles.modalContent}>
-                <button onClick={closeModal} className={styles.closeBtn}>&times;</button>
+                <button onClick={props.closeModal} className={styles.closeBtn}>&times;</button>
                 {props.children}
             </div>
 

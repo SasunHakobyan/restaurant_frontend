@@ -1,14 +1,14 @@
-import styles from './EditRestaurant.module.css';
-import MainContent from '../../layout/MainContent/MainContent';
+import styles from '../AddRestaurantPage/AddRestaurant.module.css';
+import MainContent from '../../../layout/MainContent/MainContent';
 import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../store/store";
-import {getRestaurantFormData} from "../../store/reducers/restaurantReducer";
-import {IAddRestaurant} from "../../models/restaurant";
-import {editRestaurant} from "../../store/thunk/restaurant/editRestaurant";
+import {useAppDispatch, useAppSelector} from "../../../store/store";
+import {getRestaurantFormData} from "../../../store/reducers/restaurantReducer";
+import {IAddRestaurant} from "../../../models/restaurant";
+import {editRestaurant} from "../../../store/thunk/restaurant/editRestaurant";
 
-const EditRestaurant = () => {
+const EditRestaurantPage = () => {
 	const dispatch = useAppDispatch();
 	const {restaurantFormData} = useAppSelector(state => state.restaurantReducer);
 	const {restaurantId} = useParams<{restaurantId?: string}>();
@@ -38,7 +38,7 @@ const EditRestaurant = () => {
 	return (
 		<MainContent>
 			<h3>Edit Restaurant</h3>
-			<form onSubmit={handleSubmit(
+			<form className={styles.form} onSubmit={handleSubmit(
 				formSubmitHandler
 			)}>
 				<div className={styles.formControl}>
@@ -65,10 +65,10 @@ const EditRestaurant = () => {
 						})
 					} />
 				</div>
-				<input type='submit' value='Save' />
+				<input className={styles.submitBtn} type='submit' value='Save' />
 			</form>
 		</MainContent>
 	)
 }
 
-export default EditRestaurant;
+export default EditRestaurantPage;

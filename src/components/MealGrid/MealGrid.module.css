@@ -1,5 +1,37 @@
 .listGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+}
+
+@media (max-width: 980px) {
+    .listGrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+}
+
+@media (max-width: 730px) {
+    .listGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+}
+
+@media (max-width: 460px) {
+    .listGrid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
 }

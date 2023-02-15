@@ -1,6 +1,6 @@
 import styles from './RestaurantItem.module.css';
 import { IRestaurant } from "../../models/restaurant";
-import { Link } from 'react-router-dom';
+import {Link, NavLink} from "react-router-dom";
 
 interface IRestaurantItemProps {
     restaurant: IRestaurant;
@@ -14,12 +14,10 @@ const RestaurantItem = (props: IRestaurantItemProps) => {
             </div>
             <div className={styles.infoContainer}>
                 <div>
-                    <h3>{props.restaurant.name}</h3>
-                    <p>{props.restaurant.description}</p>
+                    <h3 className={styles.restName}>{props.restaurant.name}</h3>
+                    <p className={styles.restDescription}>{props.restaurant.description}</p>
                 </div>
-                <div>
-                    <Link className={styles.editLink} to={`/edit-restaurant/${props.restaurant.id}`}>Edit</Link>
-                </div>
+                <Link className={styles.detailLink} to='/asd'>See meals <span className={styles.linkArrow}>&#8594;</span></Link>
             </div>
         </div>
     );

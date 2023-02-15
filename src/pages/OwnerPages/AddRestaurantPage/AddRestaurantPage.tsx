@@ -1,12 +1,12 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import MainContent from '../../layout/MainContent/MainContent';
-import { IAddRestaurant } from '../../models/restaurant';
-import {useAppDispatch, useAppSelector} from '../../store/store';
+import MainContent from '../../../layout/MainContent/MainContent';
+import { IAddRestaurant } from '../../../models/restaurant';
+import {useAppDispatch, useAppSelector} from '../../../store/store';
 import styles from './AddRestaurant.module.css';
 import {useNavigate} from "react-router-dom";
-import {addRestaurant} from "../../store/thunk/restaurant/addRestaurant";
+import {addRestaurant} from "../../../store/thunk/restaurant/addRestaurant";
 
-const AddRestaurant = () => {
+const AddRestaurantPage = () => {
 	const restaurantState = useAppSelector(state => state.restaurantReducer);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -64,10 +64,10 @@ const AddRestaurant = () => {
 						})
 					} />
 				</div>
-				<input type='submit' value='Add' />
+				<input className={styles.submitBtn} type='submit' value='Add' />
 			</form>
 		</MainContent>
 	)
 }
 
-export default AddRestaurant;
+export default AddRestaurantPage;

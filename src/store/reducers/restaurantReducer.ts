@@ -9,6 +9,7 @@ interface IRestaurantState {
     restaurants: IRestaurant[] | null;
     restaurantFormData: IAddRestaurant;
     saved: boolean;
+    isLoading: boolean;
 }
 
 const initialState: IRestaurantState = {
@@ -18,7 +19,8 @@ const initialState: IRestaurantState = {
         description: '',
         imgUrl: ''
     },
-    saved: false
+    saved: false,
+    isLoading: false,
 }
 
 export const getRestaurantFormData = createAsyncThunk(
@@ -42,24 +44,35 @@ export const restaurantSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fillRestaurants.pending, (state, action) => {
-
+                state.isLoading = true;
             })
             .addCase(fillRestaurants.fulfilled, (state, action) => {
+                state.isLoading = false;
                 state.restaurants = action.payload;
             })
             .addCase(fillRestaurants.rejected, (state, action) => {
-
+                state.isLoading = false;
             })
 
         builder
+            .addCase(addRestaurant.pending, (state, action) => {
+                state.isLoading = true;
+            })
             .addCase(addRestaurant.fulfilled, (state, action) => {
+                state.isLoading = false;
                 state.saved = true;
             })
             .addCase(addRestaurant.rejected, (state, action) => {
+                state.isLoading = false;
+                console.log(action)
             })
 
         builder
+            .addCase(getRestaurantFormData.pending, (state, action) => {
+                state.isLoading = true;
+            })
             .addCase(getRestaurantFormData.fulfilled, (state, action) => {
+                state.isLoading = false;
                 state.restaurantFormData = {
                     name: action.payload.name,
                     description: action.payload.description,
@@ -67,6 +80,7 @@ export const restaurantSlice = createSlice({
                 }
             })
             .addCase(getRestaurantFormData.rejected, (state, action) => {
+                state.isLoading = false;
             })
     }
 });
