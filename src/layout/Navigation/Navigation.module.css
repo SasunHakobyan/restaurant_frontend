@@ -7,7 +7,7 @@ p {
     display: flex;
     flex-direction: column;
     margin: 10px 0;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -91,6 +91,10 @@ p {
     font-weight: bold;
     color: grey;
     margin-bottom: .5rem;
+}
+
+.editLink {
+    margin: 10px 0;
 }
 
 .btnLogout {

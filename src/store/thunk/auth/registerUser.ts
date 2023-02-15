@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {IUser, IUserAuth} from "../../../models/user";
-import {authApi} from "../../../services/authApi";
+import {authApi} from "../../../api/authApi";
 import {AxiosError} from "axios";
 
 interface UserNotFoundError {

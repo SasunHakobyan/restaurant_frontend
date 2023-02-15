@@ -5,11 +5,11 @@ import mealLogo from '../../assets/logos/meal.svg';
 import homeLogo from '../../assets/logos/home.svg';
 import profileLogo from '../../assets/logos/profile.png'
 
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {authSlice} from "../../store/reducers/authReducer";
 import {useAppSelector} from "../../store/store";
-import {UserSign} from "../../models/user";
+import {RoleValue, UserSign} from "../../models/user";
 import {MouseEventHandler} from "react";
 import {modalSlice} from "../../store/reducers/modalReducer";
 
@@ -32,7 +32,7 @@ const Navigation = (props: INavigationProps) => {
 
     const navLinkHandler: MouseEventHandler<HTMLElement> = (e) => {
         if (!props.isLoggedIn) {
-            e.preventDefault()
+            e.preventDefault();
 
             dispatch(modalSlice.actions.setShowMessage({
                 toggle: true,
@@ -83,6 +83,12 @@ const Navigation = (props: INavigationProps) => {
                     <img className={styles.profileLogo} src={profileLogo} alt=""/>
                     <span className={styles.profileName}>{authState.user.username}</span>
                     <span className={styles.profileRole}>{authState.user.role.value}</span>
+                    {authState.user.role.value === RoleValue.Admin &&
+                        <Link className={styles.editLink} to='/admin'>Manage</Link>
+                    }
+                    {authState.user.role.value === RoleValue.RestOwner &&
+                        <Link className={styles.editLink} to='/manage'>Manage</Link>
+                    }
                     <button onClick={onLogoutButtonClick} className={styles.btnLogout}>Logout</button>
                 </div>
             }

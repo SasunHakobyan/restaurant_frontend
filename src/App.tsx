@@ -16,6 +16,7 @@ import ProtectAdmin from "./hoc/ProtectAdmin";
 import HomePage from "./pages/UserPages/HomePage/HomePage";
 import MealsPage from "./pages/UserPages/MealsPage/MealsPage";
 import InfoModal from "./components/InfoModal/InfoModal";
+import AdminHomePage from "./pages/AdminPages/AdminHomePage/AdminHomePage";
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -44,6 +45,18 @@ function App() {
                     </ProtectAuth>
                 } />
 
+                <Route path='/admin' element={
+                    <ProtectAdmin>
+                        <AdminHomePage/>
+                    </ProtectAdmin>
+                }/>
+                <Route path='/admin/add-owner' element={
+                    <ProtectAdmin>
+                        <AddOwnerPage/>
+                    </ProtectAdmin>
+                }/>
+
+
                 <Route path='/admin/add-restaurant' element={
                     <ProtectOwner>
                         <AddRestaurantPage />
@@ -54,11 +67,6 @@ function App() {
                         <EditRestaurantPage />
                     </ProtectOwner>
                 } />
-                <Route path='/admin/add-owner' element={
-                    <ProtectAdmin>
-                        <AddOwnerPage/>
-                    </ProtectAdmin>
-                }/>
             </Routes>
         </div>
     );

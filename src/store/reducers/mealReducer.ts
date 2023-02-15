@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {IMeal} from "../../models/meal";
-import {mealApi} from "../../services/mealApi";
+import {mealApi} from "../../api/mealApi";
 
 interface IMealState {
     meals: IMeal[] | null

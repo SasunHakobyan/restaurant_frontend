@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {restaurantApi} from "../../../services/restaurantApi";
+import {restaurantApi} from "../../../api/restaurantApi";
 
 export const fillRestaurants = createAsyncThunk(
     'restaurant/getAll',

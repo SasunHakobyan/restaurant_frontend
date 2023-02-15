@@ -66,6 +66,8 @@ export const authSlice = createSlice({
                     role: action.payload.user.role
                 };
 
+                console.log(action.payload.user)
+
                 state.showModal = false;
 
                 localStorage.setItem('authToken', action.payload.accessToken);

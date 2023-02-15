@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {IAddRestaurant} from "../../../models/restaurant";
-import {restaurantApi} from "../../../services/restaurantApi";
+import {restaurantApi} from "../../../api/restaurantApi";
 
 export const addRestaurant = createAsyncThunk(
     'restaurant/add',

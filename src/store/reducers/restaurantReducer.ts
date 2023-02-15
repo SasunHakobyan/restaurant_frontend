@@ -1,6 +1,6 @@
 import { IAddRestaurant } from '../../models/restaurant';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { restaurantApi } from "../../services/restaurantApi";
+import { restaurantApi } from "../../api/restaurantApi";
 import { IRestaurant } from "../../models/restaurant";
 import {fillRestaurants} from "../thunk/restaurant/fillRestaurants";
 import {addRestaurant} from "../thunk/restaurant/addRestaurant";

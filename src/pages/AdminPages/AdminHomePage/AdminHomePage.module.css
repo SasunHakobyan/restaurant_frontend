@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.manageBtn {
+    width: 100px;
+    border: none;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    background-color: #FFCB3F;
+    color: black;
+    margin: 10px 0;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
