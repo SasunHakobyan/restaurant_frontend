@@ -3,6 +3,8 @@ import MainContent from "../../../layout/MainContent/MainContent";
 import styles from './OwnersPage.module.css';
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {fillOwners} from "../../../store/thunk/admin/fillOwners";
+import {deleteOwner} from "../../../store/thunk/admin/deleteOwner";
+import {Link} from "react-router-dom";
 
 const OwnersPage = () => {
     const {owners} = useAppSelector(state => state.adminReducer);
@@ -13,7 +15,7 @@ const OwnersPage = () => {
     }
 
     const onDeleteClickHandler = (ownerId: number) => {
-
+        dispatch(deleteOwner(ownerId))
     }
 
     useEffect(() => {
@@ -40,13 +42,18 @@ const OwnersPage = () => {
                                     <td>{owner.id}</td>
                                     <td>{owner.username}</td>
                                     <td>Edit</td>
-                                    <td onClick={() => onDeleteClickHandler(owner.id)}>Delete</td>
+                                    <td onClick={() => onDeleteClickHandler(owner.id)}>
+                                        <button className={styles.deleteBtn}>
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             )
                         })
                     }
                     </tbody>
                 </table>
+                <Link className={styles.addLink} to='/admin/add-owner'>Add Owner</Link>
             </div>
         </MainContent>
     );
