@@ -26,6 +26,7 @@ import OwnerMealsPage from "./pages/OwnerPages/OwnerMealsPage/OwnerMealsPage";
 import AddMealPage from "./pages/OwnerPages/AddMealPage/AddMealPage";
 import EditMealPage from "./pages/OwnerPages/EditMealPage/EditMealPage";
 import RestaurantDetailPage from "./pages/UserPages/RestaurantDetailPage/RestaurantDetailPage";
+import Cart from "./components/Cart/Cart";
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -43,6 +44,7 @@ function App() {
             {modalState.show && <InfoModal/>}
             {!authState.isLoggedIn && authState.showModal && <AuthModal />}
             <Navigation isLoggedIn={authState.isLoggedIn} />
+            <Cart/>
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/restaurant/:id' element={

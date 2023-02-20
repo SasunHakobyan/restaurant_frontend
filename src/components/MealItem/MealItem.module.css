@@ -33,3 +33,18 @@
     font-size: 1.5rem;
     color: #FFCB3F;
 }
+
+.cartBtn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.cartBtn button {
+    background-color: rgb(255, 203, 63);
+    border-radius: 5px;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+}
