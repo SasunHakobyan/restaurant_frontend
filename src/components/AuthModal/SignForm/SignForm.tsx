@@ -51,7 +51,7 @@ const SignForm = (props: ISignFormProps) => {
             </div>
             <div className={styles.formControl}>
                 <label>Password</label>
-                <input {...register('password', {
+                <input type='password' {...register('password', {
                     required: 'Password is required',
                     minLength: {
                         value: 4,

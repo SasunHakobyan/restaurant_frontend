@@ -89,7 +89,7 @@ const Navigation = (props: INavigationProps) => {
                         <Link className={styles.editLink} to='/admin'>Manage</Link>
                     }
                     {authState.user.role.value === RoleValue.RestOwner &&
-                        <Link className={styles.editLink} to='/manage'>Manage</Link>
+                        <Link className={styles.editLink} to='/owner'>Manage</Link>
                     }
                     <button onClick={onLogoutButtonClick} className={styles.btnLogout}>Logout</button>
                 </div>

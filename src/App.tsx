@@ -20,6 +20,12 @@ import AdminHomePage from "./pages/AdminPages/AdminHomePage/AdminHomePage";
 import OwnersPage from "./pages/AdminPages/OwnersPage/OwnersPage";
 import DeleteRestaurantPage from "./pages/AdminPages/DeleteRestaurantPage/DeleteRestaurantPage";
 import DeleteMealsPage from "./pages/AdminPages/DeleteMealsPage/DeleteMealsPage";
+import OwnerHomePage from "./pages/OwnerPages/OwnerHomePage/OwnerHomePage";
+import OwnerRestaurantsPage from "./pages/OwnerPages/OwnerRestaurantsPage/OwnerRestaurantsPage";
+import OwnerMealsPage from "./pages/OwnerPages/OwnerMealsPage/OwnerMealsPage";
+import AddMealPage from "./pages/OwnerPages/AddMealPage/AddMealPage";
+import EditMealPage from "./pages/OwnerPages/EditMealPage/EditMealPage";
+import RestaurantDetailPage from "./pages/UserPages/RestaurantDetailPage/RestaurantDetailPage";
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -39,6 +45,11 @@ function App() {
             <Navigation isLoggedIn={authState.isLoggedIn} />
             <Routes>
                 <Route path='/' element={<HomePage />} />
+                <Route path='/restaurant/:id' element={
+                    <ProtectAuth>
+                        <RestaurantDetailPage/>
+                    </ProtectAuth>
+                }/>
                 <Route path='/restaurants' element={
                     <ProtectAuth>
                         <RestaurantsPage />
@@ -76,16 +87,42 @@ function App() {
                     </ProtectAdmin>
                 } />
 
-                <Route path='/admin/add-restaurant' element={
+                <Route path='/owner' element={
+                    <ProtectOwner>
+                        <OwnerHomePage/>
+                    </ProtectOwner>
+                }/>
+                <Route path='/owner/restaurants' element={
+                    <ProtectOwner>
+                        <OwnerRestaurantsPage/>
+                    </ProtectOwner>
+                }/>
+                <Route path='/owner/add-restaurant' element={
                     <ProtectOwner>
                         <AddRestaurantPage />
                     </ProtectOwner>
                 } />
-                <Route path='/admin/edit-restaurant/:restaurantId' element={
+                <Route path='/owner/edit-restaurant/:restaurantId' element={
                     <ProtectOwner>
                         <EditRestaurantPage />
                     </ProtectOwner>
                 } />
+                <Route path='/owner/meals' element={
+                    <ProtectOwner>
+                        <OwnerMealsPage />
+                    </ProtectOwner>
+                } />
+                <Route path='/owner/add-meal' element={
+                    <ProtectOwner>
+                        <AddMealPage />
+                    </ProtectOwner>
+                } />
+                <Route path='/owner/edit-meal/:mealId' element={
+                    <ProtectOwner>
+                        <EditMealPage />
+                    </ProtectOwner>
+                } />
+
             </Routes>
         </div>
     );
