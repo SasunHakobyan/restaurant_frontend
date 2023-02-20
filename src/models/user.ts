@@ -23,3 +23,9 @@ export enum UserSign {
     SignIn = 'signIn',
     SignUp = 'signUp'
 }
+
+export interface UserNotFoundError {
+    error: string;
+    message: string;
+    statusCode: number;
+}

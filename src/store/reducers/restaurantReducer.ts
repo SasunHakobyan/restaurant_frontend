@@ -4,12 +4,14 @@ import { restaurantApi } from "../../api/restaurantApi";
 import { IRestaurant } from "../../models/restaurant";
 import {fillRestaurants} from "../thunk/restaurant/fillRestaurants";
 import {addRestaurant} from "../thunk/restaurant/addRestaurant";
+import {deleteRestaurant} from "../thunk/restaurant/deleteRestaurant";
 
 interface IRestaurantState {
     restaurants: IRestaurant[] | null;
     restaurantFormData: IAddRestaurant;
     saved: boolean;
     isLoading: boolean;
+    infoMessage: string | undefined;
 }
 
 const initialState: IRestaurantState = {
@@ -21,6 +23,7 @@ const initialState: IRestaurantState = {
     },
     saved: false,
     isLoading: false,
+    infoMessage: undefined
 }
 
 export const getRestaurantFormData = createAsyncThunk(
@@ -39,7 +42,9 @@ export const restaurantSlice = createSlice({
     name: 'restaurant',
     initialState,
     reducers: {
-
+        clearMessages(state) {
+            state.infoMessage = undefined;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -81,6 +86,14 @@ export const restaurantSlice = createSlice({
             })
             .addCase(getRestaurantFormData.rejected, (state, action) => {
                 state.isLoading = false;
+            })
+
+        builder
+            .addCase(deleteRestaurant.fulfilled, (state, action) => {
+                state.infoMessage = 'Restaurant Deleted';
+            })
+            .addCase(deleteRestaurant.rejected, (state, action) => {
+                console.log(action);
             })
     }
 });

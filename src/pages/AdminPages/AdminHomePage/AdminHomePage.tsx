@@ -8,8 +8,8 @@ const AdminHomePage = () => {
         <MainContent>
             <div className={styles.container}>
                 <Link to='/admin/owners' className={styles.manageBtn}>All Owners</Link>
-                <Link to='' className={styles.manageBtn}>Delete Restaurant</Link>
-                <Link to='' className={styles.manageBtn}>Delete Meal</Link>
+                <Link to='/admin/delete-restaurant' className={styles.manageBtn}>Delete Restaurant</Link>
+                <Link to='/admin/delete-meal' className={styles.manageBtn}>Delete Meal</Link>
             </div>
         </MainContent>
     );

@@ -18,6 +18,8 @@ import MealsPage from "./pages/UserPages/MealsPage/MealsPage";
 import InfoModal from "./components/InfoModal/InfoModal";
 import AdminHomePage from "./pages/AdminPages/AdminHomePage/AdminHomePage";
 import OwnersPage from "./pages/AdminPages/OwnersPage/OwnersPage";
+import DeleteRestaurantPage from "./pages/AdminPages/DeleteRestaurantPage/DeleteRestaurantPage";
+import DeleteMealsPage from "./pages/AdminPages/DeleteMealsPage/DeleteMealsPage";
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -25,7 +27,9 @@ function App() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(authMe());
+        if (!authState.isLoggedIn) {
+            dispatch(authMe());
+        }
     }, []);
 
     return (
@@ -61,7 +65,16 @@ function App() {
                         <AddOwnerPage/>
                     </ProtectAdmin>
                 }/>
-
+                <Route path='/admin/delete-restaurant' element={
+                    <ProtectAdmin>
+                        <DeleteRestaurantPage/>
+                    </ProtectAdmin>
+                } />
+                <Route path='/admin/delete-meal' element={
+                    <ProtectAdmin>
+                        <DeleteMealsPage/>
+                    </ProtectAdmin>
+                } />
 
                 <Route path='/admin/add-restaurant' element={
                     <ProtectOwner>

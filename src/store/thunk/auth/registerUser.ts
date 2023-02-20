@@ -1,13 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {IUser, IUserAuth} from "../../../models/user";
+import {IUser, IUserAuth, UserNotFoundError} from "../../../models/user";
 import {authApi} from "../../../api/authApi";
 import {AxiosError} from "axios";
-
-interface UserNotFoundError {
-    error: string;
-    message: string;
-    statusCode: number;
-}
 
 export const registerUser = createAsyncThunk<
     { user: IUser, accessToken: string },

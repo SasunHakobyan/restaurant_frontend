@@ -44,5 +44,15 @@ export const restaurantApi = {
                 'Authorization': `Bearer ${authToken}`
             }
         });
+    },
+
+    async deleteRestaurant(id: number) {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.delete(`/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
     }
 }

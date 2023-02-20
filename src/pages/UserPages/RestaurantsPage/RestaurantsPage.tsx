@@ -17,7 +17,7 @@ const RestaurantsPage = () => {
     return (
         <MainContent>
             {isLoading && <Loader/>}
-            {!isLoading && <RestaurantGrid restaurants={restaurants} />}
+            {!isLoading && <RestaurantGrid restaurants={restaurants}/>}
         </MainContent>
     );
 };

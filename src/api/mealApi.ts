@@ -13,5 +13,15 @@ export const mealApi = {
                 'Authorization': `Bearer ${authToken}`
             }
         });
+    },
+
+    async deleteMeal(mealId: number) {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.delete(`/${mealId}`, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
     }
 }

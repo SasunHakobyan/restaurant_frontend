@@ -5,9 +5,11 @@ import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {fillOwners} from "../../../store/thunk/admin/fillOwners";
 import {deleteOwner} from "../../../store/thunk/admin/deleteOwner";
 import {Link} from "react-router-dom";
+import {modalSlice} from "../../../store/reducers/modalReducer";
+import {adminSlice} from "../../../store/reducers/adminReducer";
 
 const OwnersPage = () => {
-    const {owners} = useAppSelector(state => state.adminReducer);
+    const {owners, infoMessage} = useAppSelector(state => state.adminReducer);
     const dispatch = useAppDispatch();
 
     const fetchOwners = async () => {
@@ -19,8 +21,13 @@ const OwnersPage = () => {
     }
 
     useEffect(() => {
+        if (infoMessage) {
+            dispatch(modalSlice.actions.setShowMessage({toggle: true, message: infoMessage}))
+            dispatch(adminSlice.actions.clearMessages());
+        }
+
         fetchOwners();
-    }, [])
+    }, [infoMessage])
 
     return (
         <MainContent>
@@ -30,7 +37,6 @@ const OwnersPage = () => {
                     <tr>
                         <th>Id</th>
                         <th>Username</th>
-                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
@@ -41,7 +47,6 @@ const OwnersPage = () => {
                                 <tr key={owner.id}>
                                     <td>{owner.id}</td>
                                     <td>{owner.username}</td>
-                                    <td>Edit</td>
                                     <td onClick={() => onDeleteClickHandler(owner.id)}>
                                         <button className={styles.deleteBtn}>
                                             Delete

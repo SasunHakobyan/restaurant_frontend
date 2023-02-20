@@ -6,12 +6,12 @@ import {addOwner} from "../thunk/admin/addOwner";
 
 interface IAdminState {
     owners: IUser[];
-    addError: string | null;
+    infoMessage: string | undefined;
 }
 
 const initialState: IAdminState = {
     owners: [],
-    addError: null
+    infoMessage: undefined
 };
 
 export const adminSlice = createSlice({
@@ -19,6 +19,9 @@ export const adminSlice = createSlice({
     initialState,
 
     reducers: {
+        clearMessages(state) {
+            state.infoMessage = undefined;
+        }
     },
 
     extraReducers(build) {
@@ -32,18 +35,18 @@ export const adminSlice = createSlice({
 
         build
             .addCase(deleteOwner.fulfilled, (state, action) => {
-
+                state.infoMessage = 'Owner Deleted';
             })
-            .addCase(deleteOwner.rejected, () => {
-
+            .addCase(deleteOwner.rejected, (state, action) => {
+                state.infoMessage = action.payload?.message;
             })
 
         build
-            .addCase(addOwner.fulfilled, (state, action) => {
-                console.log(action);
+            .addCase(addOwner.fulfilled, (state) => {
+                state.infoMessage = 'Owner Created';
             })
             .addCase(addOwner.rejected, (state, action) => {
-                console.log(action.response.data.message)
+                state.infoMessage = action.payload?.message;
             })
     }
 });
