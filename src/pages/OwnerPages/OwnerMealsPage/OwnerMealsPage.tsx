@@ -4,7 +4,7 @@ import {fillOwnerMeals} from "../../../store/thunk/meal/fillOwnerMeals";
 import styles from './OwnerMealsPage.module.css';
 import MainContent from "../../../layout/MainContent/MainContent";
 import {deleteMeal} from "../../../store/thunk/meal/deleteMeal";
-import {modalSlice, setShowMessage} from "../../../store/reducers/modalReducer";
+import {setShowMessage} from "../../../store/reducers/modalReducer";
 import {clearMessages} from "../../../store/reducers/mealReducer";
 
 const OwnerMealsPage = () => {

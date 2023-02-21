@@ -3,6 +3,7 @@ import {IMeal} from "../../models/meal";
 import {fillMeals} from "../thunk/meal/fillMeals";
 import {deleteMeal} from "../thunk/meal/deleteMeal";
 import {fillOwnerMeals} from "../thunk/meal/fillOwnerMeals";
+import {addMeal} from "../thunk/meal/addMeal";
 
 interface IMealState {
     meals: IMeal[] | null;
@@ -45,6 +46,14 @@ export const mealSlice = createSlice({
             })
             .addCase(deleteMeal.rejected, (state, action) => {
                 console.log('error')
+            })
+
+        builder
+            .addCase(addMeal.fulfilled, (state, action) => {
+
+            })
+            .addCase(addMeal.rejected, (state, action) => {
+
             })
     }
 });

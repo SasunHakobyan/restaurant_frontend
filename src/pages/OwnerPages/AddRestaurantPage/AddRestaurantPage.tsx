@@ -34,7 +34,6 @@ const AddRestaurantPage = () => {
         dispatch(addRestaurant(reqBody));
     }
 
-    //:TODO dropdown for add meal restaurant select
     return (
         <MainContent>
             <h3>Add Restaurant</h3>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import {IMeal} from "../models/meal";
 
 const instance = axios.create({
     baseURL: 'http://localhost:5000/api/meal'
@@ -19,6 +20,16 @@ export const mealApi = {
         const authToken = localStorage.getItem('authToken');
 
         return instance.get('/owner', {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
+    async addMeal(data: Omit<IMeal, 'id'>) {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.post('/owner', data,{
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }
