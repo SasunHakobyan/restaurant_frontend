@@ -1,13 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ICart} from "../../models/cart";
+import {stat} from "fs";
 
 interface ICartState {
     cartToggle: boolean;
+    itemCount: number;
     items: ICart[]
 }
 
 const initialState: ICartState = {
     cartToggle: false,
+    itemCount: 0,
     items: []
 }
 
@@ -20,35 +23,54 @@ export const cartSlice = createSlice({
         },
 
         addToCart(state, action) {
-            state.items.push({
-                mealId: action.payload.mealId,
-                img: action.payload.imgUrl,
-                name: action.payload.name,
-                amount: 1,
-                price: action.payload.price
-            });
+            let objectIndex = -1;
+            state.items.forEach((item, index) => {
+                if (item.mealId === action.payload.mealId) objectIndex = index;
+            })
+
+            if (objectIndex !== -1) {
+                state.items[objectIndex].amount++;
+            } else {
+                state.items.push({
+                    mealId: action.payload.mealId,
+                    img: action.payload.imgUrl,
+                    name: action.payload.name,
+                    amount: 1,
+                    price: action.payload.price
+                });
+
+                state.itemCount++;
+            }
         },
 
         addAmount(state, action) {
-            const newItems = state.items.map(item => {
-                if (item.mealId === action.payload.mealId) {
-                    item.amount++;
-                    return item
-                }
+            let objectIndex: number = -1;
+            state.items.forEach((item, index) => {
+                if (item.mealId === action.payload) objectIndex = index
             });
 
-            state.items = newItems;
+            if (objectIndex !== -1) {
+                state.items[objectIndex].amount++;
+            }
         },
 
         minusAmount(state, action) {
-            const newItems = state.items.map(item => {
-                if (item.mealId === action.payload.mealId) {
-                    item.amount--;
-                    return item
-                }
+            let objectIndex: number = -1;
+            state.items.forEach((item, index) => {
+                if (item.mealId === action.payload) objectIndex = index
             });
 
-            state.items = newItems;
+            if (objectIndex !== -1 && state.items[objectIndex].amount !== 1) {
+                state.items[objectIndex].amount--;
+            }
+        },
+
+        deleteItem(state, action) {
+            state.items = state.items.filter(item => {
+                return item.mealId !== action.payload;
+            })
+
+            state.itemCount--;
         }
     }
 })
@@ -57,7 +79,8 @@ export const {
     toggleCart,
     addToCart,
     addAmount,
-    minusAmount
+    minusAmount,
+    deleteItem
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

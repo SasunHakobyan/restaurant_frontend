@@ -1,9 +1,8 @@
 .cart {
     position: absolute;
-    height: 80%;
+    height: fit-content;
     right: 20px;
-    top: 20px;
-    bottom: 20px;
+    bottom: 100px;
     padding: 10px;
     width: 300px;
 
@@ -61,6 +60,8 @@
 }
 
 .cartAmountBtns {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
 }
 
@@ -70,5 +71,21 @@
     border: none;
     border-radius: 5px;
     padding: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.makeOrderBtn {
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #f2b000;
+    cursor: pointer;
+}
+
+.itemCount {
+    background-color: #f2b000;
+    padding: 5px;
+    border-radius: 50%;
     font-weight: bold;
 }
