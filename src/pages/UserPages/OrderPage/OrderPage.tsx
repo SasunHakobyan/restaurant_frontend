@@ -37,6 +37,7 @@ const OrderPage = () => {
                         <th>RestaurantId</th>
                         <th>Order Meals</th>
                         <th>Status</th>
+                        <th>Total Price</th>
                         <th>Created At</th>
                         <th>Change Status</th>
                     </tr>
@@ -52,6 +53,7 @@ const OrderPage = () => {
                                         <OrderMeals orderMeals={order.orderMeals}/>
                                     </td>
                                     <td>{order.status}</td>
+                                    <td>{order.totalAmount}</td>
                                     <td>{formatDate(order.createdAt)}</td>
                                     <td>
                                         {order.status !== Status.Cancel.toString() &&

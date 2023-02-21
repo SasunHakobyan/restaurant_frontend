@@ -4,7 +4,6 @@ import styles from "../Cart.module.css";
 import React, {useEffect} from "react";
 import {IOrderData} from "../../../models/order";
 import {makeOrder} from "../../../store/thunk/order/makeOrder";
-import InfoModal from "../../InfoModal/InfoModal";
 import {modalSlice} from "../../../store/reducers/modalReducer";
 import {clearOrderMessages} from "../../../store/reducers/orderReducer";
 
@@ -26,7 +25,7 @@ const CartContent = () => {
     }
 
     const makeOrderHandler = () => {
-        if (restaurantId) {
+        if (restaurantId && items.length > 0) {
             const orderData: IOrderData = {
                 restaurantId: restaurantId,
                 orderMeals: items
@@ -69,7 +68,10 @@ const CartContent = () => {
                     )
                 })}
                 <div>
-                    <button onClick={makeOrderHandler} className={styles.makeOrderBtn}>Make Order</button>
+                    {items.length > 0 &&
+                        <button onClick={makeOrderHandler} className={styles.makeOrderBtn}>Make Order</button>
+                    }
+                    {items.length === 0 && <div>No meals in cart</div>}
                 </div>
             </div>
         </>
