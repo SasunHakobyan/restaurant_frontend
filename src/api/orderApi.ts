@@ -1,5 +1,5 @@
 import axios from "axios";
-import {IOrderData} from "../models/order";
+import {IChangeStatus, IOrderData, Status} from "../models/order";
 
 const instance = axios.create({
     baseURL: 'http://localhost:5000/api/order'
@@ -21,6 +21,18 @@ export const orderApi = {
         const authToken = localStorage.getItem('authToken');
 
         return instance.get('', {
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        });
+    },
+
+    changeStatus(options: IChangeStatus) {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.patch(`/${options.orderId}`, {
+            status: options.status
+        },{
             headers: {
                 Authorization: `Bearer ${authToken}`
             }

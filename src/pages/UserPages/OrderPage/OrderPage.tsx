@@ -6,6 +6,9 @@ import MainContent from "../../../layout/MainContent/MainContent";
 import OrderMeals from "../../../components/OrderMeals/OrderMeals";
 import {toggleStatusModal} from "../../../store/reducers/orderReducer";
 import StatusModal from "./StatusModal/StatusModal";
+import {Status} from "../../../models/order";
+import {log} from "util";
+import {stat} from "fs";
 
 const formatDate = (date: Date) => {
     return new Date(date).toISOString().split('T')[0];
@@ -13,19 +16,19 @@ const formatDate = (date: Date) => {
 
 const OrderPage = () => {
     const dispatch = useAppDispatch();
-    const {orders, showStatusModal} = useAppSelector(state => state.orderReducer);
+    const {orders, showStatusModal, statusChangeOrderId} = useAppSelector(state => state.orderReducer);
 
     useEffect(() => {
         dispatch(getOrders());
-    }, [])
+    }, [showStatusModal])
 
-    const changeStatusHandler = () => {
-        dispatch(toggleStatusModal());
+    const changeStatusHandler = (orderId: number) => {
+        dispatch(toggleStatusModal(orderId));
     }
 
     return (
         <MainContent>
-            {showStatusModal && <StatusModal/>}
+            {showStatusModal && statusChangeOrderId && <StatusModal orderId={statusChangeOrderId} />}
             <div className={styles.container}>
                 <table className={styles.ordersTable}>
                     <thead>
@@ -50,7 +53,14 @@ const OrderPage = () => {
                                     </td>
                                     <td>{order.status}</td>
                                     <td>{formatDate(order.createdAt)}</td>
-                                    <td><button onClick={changeStatusHandler} className={styles.statusBtn}>Change Status</button></td>
+                                    <td>
+                                        {order.status !== Status.Cancel.toString() &&
+                                            <button
+                                                onClick={() => changeStatusHandler(order.id)}
+                                                className={styles.statusBtn}>Change Status
+                                            </button>
+                                        }
+                                    </td>
                                 </tr>
                             )
                         })

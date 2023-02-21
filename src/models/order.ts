@@ -1,5 +1,7 @@
 export enum Status {
-    Placed = "Placed"
+    Placed = "Placed",
+    Cancel = "Canceled",
+    Received = "Received"
 }
 
 export interface IOrder {
@@ -19,4 +21,9 @@ export interface IOrderMeals {
 export interface IOrderData {
     restaurantId: number;
     orderMeals: IOrderMeals[];
+}
+
+export interface IChangeStatus {
+    orderId: number;
+    status: Status;
 }
