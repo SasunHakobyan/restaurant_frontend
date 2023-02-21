@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './MealItem.module.css';
 
 import {IMeal} from "../../models/meal";
-import {useAppDispatch} from "../../store/store";
+import {useAppDispatch, useAppSelector} from "../../store/store";
 import {addToCart} from "../../store/reducers/cartReducer";
 
 interface IMealProps {
@@ -17,8 +17,10 @@ const MealItem = (props: IMealProps) => {
             mealId: props.meal.id,
             imgUrl: props.meal.imgUrl,
             name: props.meal.name,
-            price: props.meal.price
+            price: props.meal.price,
+            restaurantId: props.meal.restaurantId
         }
+
         dispatch(addToCart(cartItem));
     }
 

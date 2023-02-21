@@ -6,6 +6,7 @@ import mealReducer from "./reducers/mealReducer";
 import modalReducer from "./reducers/modalReducer";
 import adminReducer from "./reducers/adminReducer";
 import cartReducer from "./reducers/cartReducer";
+import orderReducer from "./reducers/orderReducer";
 
 const rootReducer = combineReducers({
     authReducer: authReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     restaurantReducer: restaurantReducer,
     mealReducer: mealReducer,
     modalReducer: modalReducer,
-    cartReducer: cartReducer
+    cartReducer: cartReducer,
+    orderReducer: orderReducer
 });
 
 export const store = configureStore({

@@ -1,4 +1,4 @@
-export interface ICart {
+export interface ICartItem {
     mealId: number;
     img: string;
     name: string;

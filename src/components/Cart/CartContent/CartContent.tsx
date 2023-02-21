@@ -1,11 +1,17 @@
 import {useAppDispatch, useAppSelector} from "../../../store/store";
-import {addAmount, deleteItem, minusAmount} from "../../../store/reducers/cartReducer";
+import {addAmount, clearCart, deleteItem, minusAmount} from "../../../store/reducers/cartReducer";
 import styles from "../Cart.module.css";
-import React from "react";
+import React, {useEffect} from "react";
+import {IOrderData} from "../../../models/order";
+import {makeOrder} from "../../../store/thunk/order/makeOrder";
+import InfoModal from "../../InfoModal/InfoModal";
+import {modalSlice} from "../../../store/reducers/modalReducer";
+import {clearOrderMessages} from "../../../store/reducers/orderReducer";
 
 const CartContent = () => {
     const dispatch = useAppDispatch();
-    const {items} = useAppSelector(state => state.cartReducer);
+    const {items, restaurantId} = useAppSelector(state => state.cartReducer);
+    const {createdSuccess, infoMessage} = useAppSelector(state => state.orderReducer);
 
     const plusAmountHandler = (mealId: number) => {
         dispatch(addAmount(mealId));
@@ -18,6 +24,25 @@ const CartContent = () => {
     const deleteItemHandler = (mealId: number) => {
         dispatch(deleteItem(mealId));
     }
+
+    const makeOrderHandler = () => {
+        if (restaurantId) {
+            const orderData: IOrderData = {
+                restaurantId: restaurantId,
+                orderMeals: items
+            }
+
+            dispatch(makeOrder(orderData));
+        }
+    }
+
+    useEffect(() => {
+        if (createdSuccess && infoMessage) {
+            dispatch(modalSlice.actions.setShowMessage({toggle: true, message: infoMessage}))
+            dispatch(clearCart());
+            dispatch(clearOrderMessages());
+        }
+    }, [createdSuccess])
 
     return (
         <>
@@ -44,7 +69,7 @@ const CartContent = () => {
                     )
                 })}
                 <div>
-                    <button className={styles.makeOrderBtn}>Make Order</button>
+                    <button onClick={makeOrderHandler} className={styles.makeOrderBtn}>Make Order</button>
                 </div>
             </div>
         </>

@@ -1,14 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {ICart} from "../../models/cart";
+import {ICartItem} from "../../models/cart";
 import {stat} from "fs";
 
 interface ICartState {
+    restaurantId: number | undefined;
     cartToggle: boolean;
     itemCount: number;
-    items: ICart[]
+    items: ICartItem[]
 }
 
 const initialState: ICartState = {
+    restaurantId: undefined,
     cartToggle: false,
     itemCount: 0,
     items: []
@@ -22,6 +24,13 @@ export const cartSlice = createSlice({
             state.cartToggle = !state.cartToggle;
         },
 
+        clearCart(state) {
+            state.restaurantId = undefined;
+            state.cartToggle = false;
+            state.itemCount = 0;
+            state.items = [];
+        },
+
         addToCart(state, action) {
             let objectIndex = -1;
             state.items.forEach((item, index) => {
@@ -31,15 +40,21 @@ export const cartSlice = createSlice({
             if (objectIndex !== -1) {
                 state.items[objectIndex].amount++;
             } else {
-                state.items.push({
-                    mealId: action.payload.mealId,
-                    img: action.payload.imgUrl,
-                    name: action.payload.name,
-                    amount: 1,
-                    price: action.payload.price
-                });
+                if (!state.restaurantId) {
+                    state.restaurantId = action.payload.restaurantId;
+                }
 
-                state.itemCount++;
+                if (state.restaurantId === action.payload.restaurantId) {
+                    state.items.push({
+                        mealId: action.payload.mealId,
+                        img: action.payload.imgUrl,
+                        name: action.payload.name,
+                        amount: 1,
+                        price: action.payload.price
+                    });
+
+                    state.itemCount++;
+                }
             }
         },
 
@@ -80,7 +95,8 @@ export const {
     addToCart,
     addAmount,
     minusAmount,
-    deleteItem
+    deleteItem,
+    clearCart
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
