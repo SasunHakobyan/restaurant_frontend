@@ -2,14 +2,14 @@ import React, {useEffect} from 'react';
 import MainContent from "../../../layout/MainContent/MainContent";
 import styles from './OwnerRestaurantsPage.module.css';
 import {useAppDispatch, useAppSelector} from "../../../store/store";
-import {fillRestaurants} from "../../../store/thunk/restaurant/fillRestaurants";
+import {fillOwnerRestaurants} from "../../../store/thunk/restaurant/fillOwnerRestaurants";
 
 const OwnerRestaurantsPage = () => {
     const dispatch = useAppDispatch();
     const {restaurants} = useAppSelector(state => state.restaurantReducer);
 
     useEffect(() => {
-        dispatch(fillRestaurants());
+        dispatch(fillOwnerRestaurants());
     }, [restaurants])
 
     return (
@@ -21,7 +21,6 @@ const OwnerRestaurantsPage = () => {
                         <th>Id</th>
                         <th>Name</th>
                         <th>Img</th>
-                        <th>Owner Id</th>
                         <th>Description</th>
                         <th>Delete</th>
                     </tr>
@@ -34,7 +33,6 @@ const OwnerRestaurantsPage = () => {
                                     <td>{restaurant.id}</td>
                                     <td>{restaurant.name}</td>
                                     <td><img src={restaurant.imgUrl}/></td>
-                                    <td>{restaurant.ownerId}</td>
                                     <td>{restaurant.description}</td>
                                     <td>
                                         <button

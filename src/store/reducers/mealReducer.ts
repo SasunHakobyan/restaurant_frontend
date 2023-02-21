@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {IMeal} from "../../models/meal";
 import {fillMeals} from "../thunk/meal/fillMeals";
 import {deleteMeal} from "../thunk/meal/deleteMeal";
+import {fillOwnerMeals} from "../thunk/meal/fillOwnerMeals";
 
 interface IMealState {
     meals: IMeal[] | null;
@@ -31,6 +32,14 @@ export const mealSlice = createSlice({
             })
 
         builder
+            .addCase(fillOwnerMeals.fulfilled, (state, action) => {
+                state.meals = action.payload;
+            })
+            .addCase(fillOwnerMeals.rejected, (state, action) => {
+
+            })
+
+        builder
             .addCase(deleteMeal.fulfilled, (state, action) => {
                 state.infoMessage = 'Meal Deleted';
             })
@@ -39,5 +48,7 @@ export const mealSlice = createSlice({
             })
     }
 });
+
+export const {clearMessages} = mealSlice.actions;
 
 export default mealSlice.reducer;

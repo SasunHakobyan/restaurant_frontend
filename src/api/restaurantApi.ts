@@ -16,6 +16,16 @@ export const restaurantApi = {
         });
     },
 
+    async getOwnerRestaurants() {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.get('/owner', {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
     async addRestaurant(data: IAddRestaurant) {
         const authToken = localStorage.getItem('authToken');
 

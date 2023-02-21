@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../../store/store';
 import styles from './AddRestaurant.module.css';
 import {useNavigate} from "react-router-dom";
 import {addRestaurant} from "../../../store/thunk/restaurant/addRestaurant";
+import React from "react";
 
 const AddRestaurantPage = () => {
     const restaurantState = useAppSelector(state => state.restaurantReducer);
@@ -37,22 +38,23 @@ const AddRestaurantPage = () => {
     return (
         <MainContent>
             <h3>Add Restaurant</h3>
-            <form className={styles.form} onSubmit={handleSubmit(
-                formSubmitHandler
-            )}>
+            <form className={styles.form} onSubmit={handleSubmit(formSubmitHandler)}>
                 <div className={styles.formControl}>
                     <label>Name</label>
                     <input {
                                ...register('name', {
                                    required: 'Name is required',
+                                   minLength: 4
                                })
                            } />
+                    {errors?.name && <span className={styles.errorMsg}>{errors?.name?.message?.toString()}</span>}
                 </div>
                 <div className={styles.formControl}>
                     <label>Description</label>
                     <textarea {
                                   ...register('description', {
                                       required: 'Description is required',
+                                      minLength: 4
                                   })
                               } />
                 </div>

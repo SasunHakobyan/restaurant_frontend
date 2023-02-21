@@ -5,6 +5,7 @@ import { IRestaurant } from "../../models/restaurant";
 import {fillRestaurants} from "../thunk/restaurant/fillRestaurants";
 import {addRestaurant} from "../thunk/restaurant/addRestaurant";
 import {deleteRestaurant} from "../thunk/restaurant/deleteRestaurant";
+import {fillOwnerRestaurants} from "../thunk/restaurant/fillOwnerRestaurants";
 
 interface IRestaurantState {
     restaurants: IRestaurant[] | null;
@@ -56,6 +57,18 @@ export const restaurantSlice = createSlice({
                 state.restaurants = action.payload;
             })
             .addCase(fillRestaurants.rejected, (state, action) => {
+                state.isLoading = false;
+            })
+
+        builder
+            .addCase(fillOwnerRestaurants.pending, (state, action) => {
+                state.isLoading = true;
+            })
+            .addCase(fillOwnerRestaurants.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.restaurants = action.payload;
+            })
+            .addCase(fillOwnerRestaurants.rejected, (state, action) => {
                 state.isLoading = false;
             })
 

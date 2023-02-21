@@ -26,4 +26,6 @@ export const modalSlice = createSlice({
     }
 });
 
+export const {setShowMessage} = modalSlice.actions;
+
 export default modalSlice.reducer;

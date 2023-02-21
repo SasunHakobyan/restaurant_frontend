@@ -15,6 +15,16 @@ export const mealApi = {
         });
     },
 
+    async getOwnerMeals() {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.get('/owner', {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
     async deleteMeal(mealId: number) {
         const authToken = localStorage.getItem('authToken');
 

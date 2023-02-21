@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ownersTable {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+thead tr {
+    background-color: #f2b000;
+    color: #ffffff;
+    text-align: left;
+}
+
+th {
+    padding: 12px 15px;
+}
+
+td {
+    padding: 12px 15px;
+}
+
+td img {
+    width: 50px;
+}
+
+.deleteBtn {
+    padding: 10px;
+    background-color: #ff3333;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
