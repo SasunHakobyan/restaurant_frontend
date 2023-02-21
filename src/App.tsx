@@ -27,6 +27,7 @@ import AddMealPage from "./pages/OwnerPages/AddMealPage/AddMealPage";
 import EditMealPage from "./pages/OwnerPages/EditMealPage/EditMealPage";
 import RestaurantDetailPage from "./pages/UserPages/RestaurantDetailPage/RestaurantDetailPage";
 import Cart from "./components/Cart/Cart";
+import OrderPage from "./pages/UserPages/OrderPage/OrderPage";
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -62,6 +63,11 @@ function App() {
                         <MealsPage />
                     </ProtectAuth>
                 } />
+                <Route path='/orders' element={
+                    <ProtectAuth>
+                        <OrderPage/>
+                    </ProtectAuth>
+                }/>
 
                 <Route path='/admin' element={
                     <ProtectAdmin>

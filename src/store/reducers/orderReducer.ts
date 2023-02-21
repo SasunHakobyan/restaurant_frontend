@@ -1,17 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IOrder} from "../../models/order";
+import {IOrder, Status} from "../../models/order";
 import {makeOrder} from "../thunk/order/makeOrder";
+import {getOrders} from "../thunk/order/getOrders";
 
 interface IOrderState {
     orders: IOrder[],
     createdSuccess: boolean;
     infoMessage: string | undefined;
+    showStatusModal: boolean;
 }
 
 const initialState: IOrderState = {
     orders: [],
     createdSuccess: false,
-    infoMessage: undefined
+    infoMessage: undefined,
+    showStatusModal: false,
 }
 
 const orderSlice = createSlice({
@@ -21,6 +24,10 @@ const orderSlice = createSlice({
         clearOrderMessages(state) {
             state.createdSuccess = false;
             state.infoMessage = undefined;
+        },
+
+        toggleStatusModal(state) {
+            state.showStatusModal = !state.showStatusModal;
         }
     },
     extraReducers(builder) {
@@ -28,9 +35,13 @@ const orderSlice = createSlice({
             state.createdSuccess = true;
             state.infoMessage = 'Order Created'
         })
+
+        builder.addCase(getOrders.fulfilled, (state, action) => {
+            state.orders = action.payload;
+        })
     }
 })
 
-export const {clearOrderMessages} = orderSlice.actions;
+export const {clearOrderMessages, toggleStatusModal} = orderSlice.actions;
 
 export default orderSlice.reducer;

@@ -6,6 +6,7 @@ export interface IOrder {
     id: number;
     restaurantId: number;
     totalAmount: number;
+    orderMeals: IOrderMeals[];
     status: Status.Placed;
     createdAt: Date;
 }

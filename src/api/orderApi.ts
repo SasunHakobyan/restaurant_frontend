@@ -15,5 +15,15 @@ export const orderApi = {
                 Authorization: `Bearer ${authToken}`
             }
         });
+    },
+
+    getOrders() {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.get('', {
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        });
     }
 }

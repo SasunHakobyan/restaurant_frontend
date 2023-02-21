@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.ordersTable {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+thead tr {
+    background-color: #f2b000;
+    color: #ffffff;
+    text-align: left;
+}
+
+th {
+    padding: 12px 15px;
+}
+
+td {
+    padding: 12px 15px;
+}
+
+.statusBtn {
+    background-color: #f2b000;
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}

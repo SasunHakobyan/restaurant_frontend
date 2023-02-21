@@ -4,6 +4,7 @@ import restaurantLogo from '../../assets/logos/restaurant.svg';
 import mealLogo from '../../assets/logos/meal.svg';
 import homeLogo from '../../assets/logos/home.svg';
 import profileLogo from '../../assets/logos/profile.png'
+import orderLogo from '../../assets/logos/order.png'
 
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -78,6 +79,15 @@ const Navigation = (props: INavigationProps) => {
                         <p className={styles.menuText}>Meals</p>
                     </NavLink>
                 </div>
+                {props.isLoggedIn &&
+                    <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
+                             className={styles.navItem}
+                             onClick={navLinkHandler}
+                             to='/orders'>
+                        <img alt='menu' className={styles.logo} src={orderLogo}/>
+                        <p className={styles.menuText}>Orders</p>
+                    </NavLink>
+                }
             </div>
 
             {props.isLoggedIn &&

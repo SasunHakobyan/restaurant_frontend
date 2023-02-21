@@ -1,6 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ICartItem} from "../../models/cart";
-import {stat} from "fs";
 
 interface ICartState {
     restaurantId: number | undefined;
