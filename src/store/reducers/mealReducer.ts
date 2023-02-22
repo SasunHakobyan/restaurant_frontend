@@ -56,7 +56,7 @@ export const mealSlice = createSlice({
 
         builder
             .addCase(fillMealsByIds.fulfilled, (state, action) => {
-                console.log(action);
+                state.meals = action.payload;
             })
 
         builder

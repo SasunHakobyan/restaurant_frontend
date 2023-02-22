@@ -1,0 +1,9 @@
+.itemContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.price {
+    font-weight: 600;
+    color: #FFCB3F;
+}

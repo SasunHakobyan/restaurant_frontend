@@ -24,6 +24,8 @@ const OrderPage = () => {
         dispatch(toggleStatusModal(orderId));
     }
 
+    const endedStatuses = [Status.Cancel.toString(), Status.Received.toString()]
+
     return (
         <MainContent>
             {showStatusModal && statusChangeOrderId && <StatusModal orderId={statusChangeOrderId} />}
@@ -54,7 +56,7 @@ const OrderPage = () => {
                                     <td>{order.totalAmount}</td>
                                     <td>{formatDate(order.createdAt)}</td>
                                     <td>
-                                        {order.status !== Status.Cancel.toString() &&
+                                        {!endedStatuses.includes(order.status) &&
                                             <button
                                                 onClick={() => changeStatusHandler(order.id)}
                                                 className={styles.statusBtn}>Change Status

@@ -34,3 +34,8 @@ td {
     cursor: pointer;
     border-radius: 4px;
 }
+
+.showDetailsLink {
+    color: #FFCB3F;
+    cursor: pointer;
+}

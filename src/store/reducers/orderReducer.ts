@@ -32,7 +32,7 @@ const orderSlice = createSlice({
         toggleStatusModal(state, action) {
             state.statusChangeOrderId = action.payload;
             state.showStatusModal = !state.showStatusModal;
-        }
+        },
     },
     extraReducers(builder) {
         builder
