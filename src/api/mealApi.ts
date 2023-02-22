@@ -36,6 +36,16 @@ export const mealApi = {
         });
     },
 
+    async getMeal(mealId: number) {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.get(`/${mealId}`, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
     async addMeal(data: Omit<IMeal, 'id'>) {
         const authToken = localStorage.getItem('authToken');
 

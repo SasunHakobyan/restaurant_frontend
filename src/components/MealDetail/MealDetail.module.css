@@ -1,0 +1,27 @@
+.mealContainer {
+    display: flex;
+}
+
+.imgContainer img {
+    width: 250px;
+}
+
+.mainContainer {
+    margin: 0px 20;
+}
+
+.mainHeader {
+    margin: 0;
+}
+
+.mainDescription {
+    margin: 10px 0;
+}
+
+.cartBtn button {
+    padding: 8px;
+    border: none;
+    background-color: #f2b000;
+    border-radius: 5px;
+    font-weight: bold;
+}

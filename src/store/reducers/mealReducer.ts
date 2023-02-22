@@ -5,15 +5,20 @@ import {deleteMeal} from "../thunk/meal/deleteMeal";
 import {fillOwnerMeals} from "../thunk/meal/fillOwnerMeals";
 import {addMeal} from "../thunk/meal/addMeal";
 import {fillRestaurantMeals} from "../thunk/meal/fillRestaurantMeals";
+import {fillMealDetail} from "../thunk/meal/fillMealDetail";
 
 interface IMealState {
     meals: IMeal[] | null;
     infoMessage: string | undefined;
+    mealDetailId: number | undefined;
+    mealDetail: IMeal | undefined;
 }
 
 const initialState: IMealState = {
     meals: null,
-    infoMessage: undefined
+    infoMessage: undefined,
+    mealDetailId: undefined,
+    mealDetail: undefined,
 }
 
 export const mealSlice = createSlice({
@@ -22,12 +27,20 @@ export const mealSlice = createSlice({
     reducers: {
         clearMessages(state) {
             state.infoMessage = undefined;
+        },
+        setMealDetailId(state, action) {
+            state.mealDetailId = action.payload;
         }
     },
     extraReducers: (builder) => {
         builder
             .addCase(fillMeals.fulfilled, (state, action) => {
                 state.meals = action.payload;
+            })
+
+        builder
+            .addCase(fillMealDetail.fulfilled, (state, action) => {
+                state.mealDetail = action.payload;
             })
 
         builder
@@ -44,17 +57,9 @@ export const mealSlice = createSlice({
             .addCase(deleteMeal.fulfilled, (state, action) => {
                 state.infoMessage = 'Meal Deleted';
             })
-
-        builder
-            .addCase(addMeal.fulfilled, (state, action) => {
-
-            })
-            .addCase(addMeal.rejected, (state, action) => {
-
-            })
     }
 });
 
-export const {clearMessages} = mealSlice.actions;
+export const {clearMessages, setMealDetailId} = mealSlice.actions;
 
 export default mealSlice.reducer;

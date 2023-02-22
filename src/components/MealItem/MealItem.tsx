@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './MealItem.module.css';
 
 import {IMeal} from "../../models/meal";
-import {useAppDispatch, useAppSelector} from "../../store/store";
+import {useAppDispatch} from "../../store/store";
 import {addToCart} from "../../store/reducers/cartReducer";
+import {setMealDetailId} from "../../store/reducers/mealReducer";
 
 interface IMealProps {
     meal: IMeal;
@@ -24,12 +25,21 @@ const MealItem = (props: IMealProps) => {
         dispatch(addToCart(cartItem));
     }
 
+    const openMealDetail = (id: number) => {
+        dispatch(setMealDetailId(id));
+    }
+
     return (
-        <div className={styles.cardContainer}>
+        <div onClick={() => openMealDetail(props.meal.id)} className={styles.cardContainer}>
             <img alt='product' className={styles.productImg} src={props.meal.imgUrl} />
             <div className={styles.infoContainer}>
                 <span className={styles.mealTitle}>{props.meal.name}</span>
-                <span className={styles.mealDescription}>{props.meal.description}</span>
+                <span className={styles.mealDescription}>
+                    {props.meal.description.length >= 17 ?
+                        props.meal.description.slice(0,18) + '...' :
+                        props.meal.description
+                    }
+                </span>
                 <span className={styles.mealPrice}>{props.meal.price}$</span>
             </div>
             <div className={styles.cartBtn}>
