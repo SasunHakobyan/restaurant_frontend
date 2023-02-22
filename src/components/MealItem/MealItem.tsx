@@ -42,9 +42,6 @@ const MealItem = (props: IMealProps) => {
                 </span>
                 <span className={styles.mealPrice}>{props.meal.price}$</span>
             </div>
-            <div className={styles.cartBtn}>
-                <button onClick={addToCartHandler}>Add to cart</button>
-            </div>
         </div>
     );
 };

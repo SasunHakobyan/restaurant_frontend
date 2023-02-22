@@ -24,4 +24,16 @@
     background-color: #f2b000;
     border-radius: 5px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .mealContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imgContainer img {
+        width: 100%;
+    }
 }

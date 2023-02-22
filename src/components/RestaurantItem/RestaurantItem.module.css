@@ -37,3 +37,19 @@
 .detailLink:hover .linkArrow {
     display: inline;
 }
+
+@media (max-width: 500px) {
+    .itemContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imgContainer {
+        width: 100%;
+    }
+
+    .restImg {
+        width: 100%;
+        height: 150px;
+    }
+}

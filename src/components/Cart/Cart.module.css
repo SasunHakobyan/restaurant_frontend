@@ -42,14 +42,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .cartImgContainer {
+    position: relative;
 }
 
 .cartImgContainer img {
     width: 100px;
-    border-radius: 5px;
+    height: 80px;
+}
+
+.deleteBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #da2a03;
+    border: none;
+    border-radius: 3px;
+    color: white;
 }
 
 .cartItemInfoContainer {

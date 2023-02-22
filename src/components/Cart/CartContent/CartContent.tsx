@@ -51,6 +51,7 @@ const CartContent = () => {
                         <div key={item.mealId} className={styles.cartItemContainer}>
                             <div className={styles.cartImgContainer}>
                                 <img src={item.img}/>
+                                <button className={styles.deleteBtn} onClick={() => deleteItemHandler(item.mealId)}>X</button>
                             </div>
                             <div className={styles.cartItemInfoContainer}>
                                 <span>{item.name}</span>
@@ -62,7 +63,6 @@ const CartContent = () => {
                                     <span>{item.amount}</span>
                                     <button onClick={() => plusAmountHandler(item.mealId)}>+</button>
                                 </div>
-                                <button onClick={() => deleteItemHandler(item.mealId)}>Delete</button>
                             </div>
                         </div>
                     )

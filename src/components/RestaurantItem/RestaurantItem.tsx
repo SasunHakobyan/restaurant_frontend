@@ -15,7 +15,12 @@ const RestaurantItem = (props: IRestaurantItemProps) => {
             <div className={styles.infoContainer}>
                 <div>
                     <h3 className={styles.restName}>{props.restaurant.name}</h3>
-                    <p className={styles.restDescription}>{props.restaurant.description}</p>
+                    <p className={styles.restDescription}>
+                        {props.restaurant.description.length >= 65 ?
+                            props.restaurant.description.slice(0, 65) + '...' :
+                            props.restaurant.description
+                        }
+                    </p>
                 </div>
                 <Link className={styles.detailLink} to={`/restaurant/${props.restaurant.id}`}>See meals <span className={styles.linkArrow}>&#8594;</span></Link>
             </div>
