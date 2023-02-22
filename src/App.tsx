@@ -25,7 +25,7 @@ import OwnerRestaurantsPage from "./pages/OwnerPages/OwnerRestaurantsPage/OwnerR
 import OwnerMealsPage from "./pages/OwnerPages/OwnerMealsPage/OwnerMealsPage";
 import AddMealPage from "./pages/OwnerPages/AddMealPage/AddMealPage";
 import EditMealPage from "./pages/OwnerPages/EditMealPage/EditMealPage";
-import RestaurantDetailPage from "./pages/UserPages/RestaurantDetailPage/RestaurantDetailPage";
+import RestaurantMealsPage from "./pages/UserPages/RestaurantMealsPage/RestaurantMealsPage";
 import Cart from "./components/Cart/Cart";
 import OrderPage from "./pages/UserPages/OrderPage/OrderPage";
 
@@ -50,7 +50,7 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/restaurant/:id' element={
                     <ProtectAuth>
-                        <RestaurantDetailPage/>
+                        <RestaurantMealsPage/>
                     </ProtectAuth>
                 }/>
                 <Route path='/restaurants' element={

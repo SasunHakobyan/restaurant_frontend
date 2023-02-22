@@ -16,6 +16,16 @@ export const mealApi = {
         });
     },
 
+    async getRestaurantMeals(restaurantId: number) {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.get(`?restaurantId=${restaurantId}`, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
     async getOwnerMeals() {
         const authToken = localStorage.getItem('authToken');
 

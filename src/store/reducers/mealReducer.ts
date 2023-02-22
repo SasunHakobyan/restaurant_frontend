@@ -4,6 +4,7 @@ import {fillMeals} from "../thunk/meal/fillMeals";
 import {deleteMeal} from "../thunk/meal/deleteMeal";
 import {fillOwnerMeals} from "../thunk/meal/fillOwnerMeals";
 import {addMeal} from "../thunk/meal/addMeal";
+import {fillRestaurantMeals} from "../thunk/meal/fillRestaurantMeals";
 
 interface IMealState {
     meals: IMeal[] | null;
@@ -28,24 +29,20 @@ export const mealSlice = createSlice({
             .addCase(fillMeals.fulfilled, (state, action) => {
                 state.meals = action.payload;
             })
-            .addCase(fillMeals.rejected, (state, action) => {
-
-            })
 
         builder
             .addCase(fillOwnerMeals.fulfilled, (state, action) => {
                 state.meals = action.payload;
             })
-            .addCase(fillOwnerMeals.rejected, (state, action) => {
 
+        builder
+            .addCase(fillRestaurantMeals.fulfilled, (state, action) => {
+                state.meals = action.payload;
             })
 
         builder
             .addCase(deleteMeal.fulfilled, (state, action) => {
                 state.infoMessage = 'Meal Deleted';
-            })
-            .addCase(deleteMeal.rejected, (state, action) => {
-                console.log('error')
             })
 
         builder

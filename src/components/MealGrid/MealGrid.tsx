@@ -11,6 +11,7 @@ interface IMealProps {
 const MealGrid = (props: IMealProps) => {
     return (
         <div className={styles.listGrid}>
+            {props.meals?.length === 0 && <h4>Meals not found</h4>}
             {props.meals?.map(meal => {
                 return <MealItem key={meal.id} meal={meal} />
             })}

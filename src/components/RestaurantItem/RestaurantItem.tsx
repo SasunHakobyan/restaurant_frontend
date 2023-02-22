@@ -17,7 +17,7 @@ const RestaurantItem = (props: IRestaurantItemProps) => {
                     <h3 className={styles.restName}>{props.restaurant.name}</h3>
                     <p className={styles.restDescription}>{props.restaurant.description}</p>
                 </div>
-                <Link className={styles.detailLink} to='/asd'>See meals <span className={styles.linkArrow}>&#8594;</span></Link>
+                <Link className={styles.detailLink} to={`/restaurant/${props.restaurant.id}`}>See meals <span className={styles.linkArrow}>&#8594;</span></Link>
             </div>
         </div>
     );
