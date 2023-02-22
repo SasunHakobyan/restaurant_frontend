@@ -16,12 +16,8 @@ const OrderMeals = (props: IOrderMealsProps) => {
 
     const dispatch = useAppDispatch();
 
-    const closeModal = () => {
-
-    }
-
     useEffect(() => {
-        dispatch(fillMealsByIds(mealIds))
+        // dispatch(fillMealsByIds(mealIds))
     }, [mealIds])
 
     return (
