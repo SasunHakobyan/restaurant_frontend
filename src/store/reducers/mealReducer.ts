@@ -6,6 +6,7 @@ import {fillOwnerMeals} from "../thunk/meal/fillOwnerMeals";
 import {addMeal} from "../thunk/meal/addMeal";
 import {fillRestaurantMeals} from "../thunk/meal/fillRestaurantMeals";
 import {fillMealDetail} from "../thunk/meal/fillMealDetail";
+import {fillMealsByIds} from "../thunk/meal/fillMealsByIds";
 
 interface IMealState {
     meals: IMeal[] | null;
@@ -51,6 +52,11 @@ export const mealSlice = createSlice({
         builder
             .addCase(fillRestaurantMeals.fulfilled, (state, action) => {
                 state.meals = action.payload;
+            })
+
+        builder
+            .addCase(fillMealsByIds.fulfilled, (state, action) => {
+                console.log(action);
             })
 
         builder

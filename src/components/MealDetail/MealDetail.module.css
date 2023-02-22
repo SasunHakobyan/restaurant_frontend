@@ -36,4 +36,9 @@
     .imgContainer img {
         width: 100%;
     }
+
+    .mainDescription {
+        font-weight: 600;
+        font-size: 18px;
+    }
 }

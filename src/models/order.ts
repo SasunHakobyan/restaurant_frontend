@@ -1,3 +1,6 @@
+import {IRestaurant} from "./restaurant";
+import {IMeal} from "./meal";
+
 export enum Status {
     Placed = "Placed",
     Cancel = "Canceled",
@@ -6,21 +9,21 @@ export enum Status {
 
 export interface IOrder {
     id: number;
-    restaurantId: number;
+    restaurant: IRestaurant;
     totalAmount: number;
-    orderMeals: IOrderMeals[];
+    orderMeals: IOrderMeal[];
     status: Status.Placed;
     createdAt: Date;
 }
 
-export interface IOrderMeals {
+export interface IOrderMeal {
     mealId: number;
     amount: number;
 }
 
 export interface IOrderData {
     restaurantId: number;
-    orderMeals: IOrderMeals[];
+    orderMeals: IOrderMeal[];
 }
 
 export interface IChangeStatus {

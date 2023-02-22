@@ -29,6 +29,7 @@ const MealDetail = (props: MealProps) => {
             }
 
             dispatch(addToCart(cartItem));
+            dispatch(setMealDetailId(undefined))
         }
     }
 

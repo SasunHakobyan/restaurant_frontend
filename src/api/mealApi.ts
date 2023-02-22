@@ -16,6 +16,17 @@ export const mealApi = {
         });
     },
 
+    async getMealsByIds(mealIds: number[]) {
+        const authToken = localStorage.getItem('authToken');
+        const mealsStr = mealIds.toString();
+
+        return instance.get(`?mealIds=${mealsStr}`, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
     async getRestaurantMeals(restaurantId: number) {
         const authToken = localStorage.getItem('authToken');
 

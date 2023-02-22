@@ -7,8 +7,6 @@ import OrderMeals from "../../../components/OrderMeals/OrderMeals";
 import {toggleStatusModal} from "../../../store/reducers/orderReducer";
 import StatusModal from "./StatusModal/StatusModal";
 import {Status} from "../../../models/order";
-import {log} from "util";
-import {stat} from "fs";
 
 const formatDate = (date: Date) => {
     return new Date(date).toISOString().split('T')[0];
@@ -34,7 +32,7 @@ const OrderPage = () => {
                     <thead>
                     <tr>
                         <th>OrderId</th>
-                        <th>RestaurantId</th>
+                        <th>Order Restaurant</th>
                         <th>Order Meals</th>
                         <th>Status</th>
                         <th>Total Price</th>
@@ -48,7 +46,7 @@ const OrderPage = () => {
                             return (
                                 <tr key={order.id}>
                                     <td>{order.id}</td>
-                                    <td>{order.restaurantId}</td>
+                                    <td>{order.restaurant.name}</td>
                                     <td>
                                         <OrderMeals orderMeals={order.orderMeals}/>
                                     </td>
