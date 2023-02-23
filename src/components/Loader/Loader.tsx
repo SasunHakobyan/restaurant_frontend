@@ -1,6 +1,6 @@
 import React from 'react';
-import loader from '../../assets/preloader.gif';
 import styles from './Loader.module.css';
+import loader from '../../assets/loader.gif'
 
 const Loader = () => {
     return (

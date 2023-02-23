@@ -4,9 +4,9 @@ import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {useParams} from 'react-router-dom';
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
-import {getRestaurantFormData} from "../../../store/reducers/restaurantReducer";
 import {IRestaurant} from "../../../models/restaurant";
 import {editRestaurant} from "../../../store/thunk/restaurant/editRestaurant";
+import {getRestaurantFormData} from "../../../store/thunk/restaurant/getRestaurantFormData";
 
 const EditRestaurantPage = () => {
     const dispatch = useAppDispatch();
