@@ -10,7 +10,7 @@ export const addOwner = createAsyncThunk<
     {rejectValue: ServerError}
 >(
     'admin/addOwner',
-    async (data: IUserAuth, {rejectWithValue}) => {
+    async (data, {rejectWithValue}) => {
         try {
             const response = await userApi.signOwner(data);
             return response.data;

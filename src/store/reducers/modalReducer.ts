@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface IModalState {
+type IModalState = {
     show: boolean;
     modalMessage: string;
 }
@@ -26,6 +26,6 @@ export const modalSlice = createSlice({
     }
 });
 
-export const {setShowMessage} = modalSlice.actions;
+export const {setShowMessage, closeModal} = modalSlice.actions;
 
 export default modalSlice.reducer;

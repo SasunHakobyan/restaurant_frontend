@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ICartItem} from "../../models/cart";
 
-interface ICartState {
+type ICartState = {
     restaurantId: number | undefined;
     cartToggle: boolean;
     itemCount: number;

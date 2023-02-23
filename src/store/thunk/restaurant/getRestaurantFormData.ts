@@ -1,18 +1,18 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {mealApi} from "../../../api/mealApi";
-import {IMeal} from "../../../models/meal";
+import {restaurantApi} from "../../../api/restaurantApi";
+import {IRestaurant} from "../../../models/restaurant";
 import {ServerError} from "../../../models/errors";
 import {AxiosError} from "axios";
 
-export const fillMealDetail = createAsyncThunk<
-    IMeal,
+export const getRestaurantFormData = createAsyncThunk<
+    IRestaurant,
     number,
     {rejectValue: ServerError}
 >(
-    'meal/fillMealDetail',
-    async (mealId, {rejectWithValue}) => {
+    'restaurant/getFormData',
+    async (id, { rejectWithValue }) => {
         try {
-            const response = await mealApi.getMeal(mealId);
+            const response = await restaurantApi.findRestaurant(id);
             return response.data;
         } catch (err) {
             if (err instanceof AxiosError) {

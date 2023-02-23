@@ -2,22 +2,21 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {IRestaurant} from "../../../models/restaurant";
 import {restaurantApi} from "../../../api/restaurantApi";
 import {AxiosError} from "axios";
+import {ServerError} from "../../../models/errors";
 
-export interface IBadRequestError {
-    error: string;
-    message: string;
-    statusCode: number;
-}
-
-export const addRestaurant = createAsyncThunk(
+export const addRestaurant = createAsyncThunk<
+    IRestaurant,
+    Omit<IRestaurant, "id" | "ownerId">,
+    {rejectValue: ServerError}
+>(
     'restaurant/add',
-    async (data: Omit<IRestaurant, "id" | "ownerId">, { rejectWithValue }) => {
+    async (data, { rejectWithValue }) => {
         try {
             const response = await restaurantApi.addRestaurant(data);
             return response.data;
-        } catch (err: unknown) {
+        } catch (err) {
             if (err instanceof AxiosError) {
-                return rejectWithValue(err?.response?.data as IBadRequestError)
+                return rejectWithValue(err?.response?.data as ServerError)
             }
         }
     }

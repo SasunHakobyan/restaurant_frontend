@@ -13,6 +13,8 @@ import OwnerRoutes from "./routes/OwnerRoutes";
 import ProtectOwner from "./hoc/ProtectOwner";
 import ProtectAdmin from "./hoc/ProtectAdmin";
 import AdminRoutes from "./routes/AdminRoutes";
+import HomePage from "./pages/UserPages/HomePage/HomePage";
+import {ProtectAuth} from "./hoc/ProtectAuth";
 
 function App() {
     const authState = useAppSelector(state => state.authReducer);
@@ -32,16 +34,24 @@ function App() {
             <Navigation isLoggedIn={authState.isLoggedIn} />
             <Cart/>
             <Routes>
+                <Route path='/' element={<HomePage />} />
+
                 <Route path='/owner/*' element={
                     <ProtectOwner>
                         <OwnerRoutes />
                     </ProtectOwner>} />
+
                 <Route path='/admin/*' element={
                     <ProtectAdmin>
                         <AdminRoutes/>
                     </ProtectAdmin>
                 }/>
-                <Route path='/*' element={<PublicRoutes />} />
+
+                <Route path='/*' element={
+                    <ProtectAuth>
+                        <PublicRoutes/>
+                    </ProtectAuth>
+                } />
             </Routes>
         </div>
     );

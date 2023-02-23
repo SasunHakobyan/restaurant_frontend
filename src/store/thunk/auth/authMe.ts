@@ -1,6 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {authApi} from "../../../api/authApi";
 import {AxiosError} from "axios";
+import {ServerError} from "../../../models/errors";
 
 export const authMe = createAsyncThunk(
     'auth/me',
@@ -10,7 +11,7 @@ export const authMe = createAsyncThunk(
             return response.data;
         } catch (err: unknown) {
             if (err instanceof AxiosError) {
-                return rejectWithValue(err?.response?.data);
+                return rejectWithValue(err?.response?.data as ServerError);
             }
         }
     }

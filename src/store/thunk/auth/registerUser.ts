@@ -10,11 +10,11 @@ export const registerUser = createAsyncThunk<
     { rejectValue: ServerError }
 >(
     'auth/signup',
-    async (data: IUserAuth, { rejectWithValue }) => {
+    async (data, { rejectWithValue }) => {
         try {
             const response = await authApi.register(data);
             return response.data;
-        } catch (err: unknown) {
+        } catch (err) {
             if (err instanceof AxiosError) {
                 return rejectWithValue(err?.response?.data as ServerError);
             }
