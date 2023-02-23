@@ -11,7 +11,7 @@ export const orderExtraReducers = (builder: ActionReducerMapBuilder<IOrderState>
             state.infoMessage = 'Order Created'
         })
         .addCase(makeOrder.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -19,7 +19,7 @@ export const orderExtraReducers = (builder: ActionReducerMapBuilder<IOrderState>
             state.orders = action.payload;
         })
         .addCase(getOrders.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -27,6 +27,6 @@ export const orderExtraReducers = (builder: ActionReducerMapBuilder<IOrderState>
             state.showStatusModal = false
         })
         .addCase(changeStatus.rejected, (state ,action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 }

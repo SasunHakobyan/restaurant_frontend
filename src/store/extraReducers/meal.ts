@@ -6,6 +6,7 @@ import {fillOwnerMeals} from "../thunk/meal/fillOwnerMeals";
 import {fillRestaurantMeals} from "../thunk/meal/fillRestaurantMeals";
 import {fillMealsByIds} from "../thunk/meal/fillMealsByIds";
 import {deleteMeal} from "../thunk/meal/deleteMeal";
+import {addMeal} from "../thunk/meal/addMeal";
 
 export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) => {
     builder
@@ -17,7 +18,7 @@ export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) 
             state.isLoading = false;
         })
         .addCase(fillMeals.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
             state.isLoading = false;
         })
 
@@ -26,7 +27,7 @@ export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) 
             state.mealDetail = action.payload;
         })
         .addCase(fillMealDetail.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -34,7 +35,7 @@ export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) 
             state.meals = action.payload;
         })
         .addCase(fillOwnerMeals.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -42,7 +43,7 @@ export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) 
             state.meals = action.payload;
         })
         .addCase(fillRestaurantMeals.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -50,7 +51,16 @@ export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) 
             state.meals = action.payload;
         })
         .addCase(fillMealsByIds.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
+        })
+
+    builder
+        .addCase(addMeal.fulfilled, (state, action) => {
+            state.successSave = true;
+            state.infoMessage = 'Meal was created';
+        })
+        .addCase(addMeal.rejected, (state, action) => {
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -58,6 +68,6 @@ export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) 
             state.infoMessage = 'Meal Deleted';
         })
         .addCase(deleteMeal.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 }

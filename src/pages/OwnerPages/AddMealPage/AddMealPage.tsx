@@ -4,9 +4,13 @@ import styles from './AddMealPage.module.css'
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {fillOwnerRestaurants} from "../../../store/thunk/restaurant/fillOwnerRestaurants";
+import {addMeal} from "../../../store/thunk/meal/addMeal";
+import {IMeal} from "../../../models/meal";
+import {clearMessages} from "../../../store/reducers/mealReducer";
 
 const AddMealPage = () => {
     const dispatch = useAppDispatch();
+    const {infoMessage, successSave} = useAppSelector(state => state.mealReducer);
     const {restaurants} = useAppSelector(state => state.restaurantReducer);
 
     const {
@@ -21,20 +25,38 @@ const AddMealPage = () => {
         dispatch(fillOwnerRestaurants());
     }, [])
 
+    useEffect(() => {
+        if (infoMessage) {
+            setTimeout(() => {dispatch(clearMessages())}, 2000);
+        }
+    }, [infoMessage])
+
     const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
-        console.log(data)
+        const mealData:Omit<IMeal, "id"> = {
+            name: data.name,
+            description: data.description,
+            imgUrl: data.imgUrl,
+            price: Number(data.price),
+            restaurantId: Number(data.restaurantId)
+        }
+
+        dispatch(addMeal(mealData));
     }
 
     return (
         <MainContent>
             <h3>Add Meal</h3>
             <form className={styles.form} onSubmit={handleSubmit(formSubmitHandler)}>
+                {infoMessage && <div className={successSave ? styles.successMsg : styles.errorMsg}>{infoMessage}</div>}
                 <div className={styles.formControl}>
                     <label>Name</label>
                     <input {
                                ...register('name', {
                                    required: 'Name is required',
-                                   minLength: 4
+                                   minLength: {
+                                       value: 4,
+                                       message: 'Name length must be bigger or equal to 4'
+                                   }
                                })
                            } />
                     {errors?.name && <span className={styles.errorMsg}>{errors?.name?.message?.toString()}</span>}
@@ -44,17 +66,36 @@ const AddMealPage = () => {
                     <textarea {
                                   ...register('description', {
                                       required: 'Description is required',
-                                      minLength: 4
+                                      minLength: {
+                                          value: 4,
+                                          message: 'Description length must be bigger or equal to 4'
+                                      }
                                   })
                               } />
+                    {errors?.description && <span className={styles.errorMsg}>{errors?.description?.message?.toString()}</span>}
                 </div>
                 <div className={styles.formControl}>
                     <label>Img Url</label>
                     <input {
                                ...register('imgUrl', {
-                                   required: 'imgUrl is required',
+                                   required: 'Image Url is required',
                                })
                            } />
+                    {errors?.imgUrl && <span className={styles.errorMsg}>{errors?.imgUrl?.message?.toString()}</span>}
+
+                </div>
+                <div className={styles.formControl}>
+                    <label>Price</label>
+                    <input type='number' {
+                                  ...register('price', {
+                                      required: 'Price is required',
+                                      min: {
+                                          value: 0,
+                                          message: 'Price cannot be negative'
+                                      }
+                                  })
+                              } />
+                    {errors?.price && <span className={styles.errorMsg}>{errors?.price?.message?.toString()}</span>}
                 </div>
                 <div className={styles.formControl}>
                     <label>Restaurant</label>
@@ -68,7 +109,7 @@ const AddMealPage = () => {
                         })}
                     </select>
                 </div>
-                <input className={styles.submitBtn} type='submit' value='Add'/>
+                <button className={styles.submitBtn} type='submit'>Add</button>
             </form>
         </MainContent>
     );

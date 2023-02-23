@@ -3,14 +3,26 @@ import MainContent from "../../../layout/MainContent/MainContent";
 import styles from './OwnerRestaurantsPage.module.css';
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {fillOwnerRestaurants} from "../../../store/thunk/restaurant/fillOwnerRestaurants";
+import {deleteRestaurant} from "../../../store/thunk/restaurant/deleteRestaurant";
+import {setShowMessage} from "../../../store/reducers/modalReducer";
+import {clearMessages} from "../../../store/reducers/restaurantReducer";
 
 const OwnerRestaurantsPage = () => {
     const dispatch = useAppDispatch();
-    const {restaurants} = useAppSelector(state => state.restaurantReducer);
+    const {restaurants, infoMessage} = useAppSelector(state => state.restaurantReducer);
 
     useEffect(() => {
+        if (infoMessage) {
+            dispatch(setShowMessage({toggle: true, message: infoMessage}));
+            dispatch(clearMessages());
+        }
+
         dispatch(fillOwnerRestaurants());
     }, [restaurants])
+
+    const deleteRestaurantHandler = (id: number) => {
+        dispatch(deleteRestaurant(id))
+    }
 
     return (
         <MainContent>
@@ -36,6 +48,7 @@ const OwnerRestaurantsPage = () => {
                                     <td>{restaurant.description}</td>
                                     <td>
                                         <button
+                                            onClick={() => deleteRestaurantHandler(restaurant.id)}
                                             className={styles.deleteBtn}>
                                             Delete
                                         </button>

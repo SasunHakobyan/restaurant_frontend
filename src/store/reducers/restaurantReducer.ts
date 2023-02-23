@@ -5,7 +5,7 @@ import {restaurantExtraReducers} from "../extraReducers/restaurant";
 export type IRestaurantState = {
     restaurants: IRestaurant[] | null;
     restaurantFormData: Omit<IRestaurant, "id" | "ownerId">;
-    saved: boolean;
+    savedSuccess: boolean | undefined;
     isLoading: boolean;
     infoMessage: string | undefined;
 }
@@ -17,7 +17,7 @@ const initialState: IRestaurantState = {
         description: '',
         imgUrl: ''
     },
-    saved: false,
+    savedSuccess: undefined,
     isLoading: false,
     infoMessage: undefined
 }
@@ -28,6 +28,7 @@ export const restaurantSlice = createSlice({
     reducers: {
         clearMessages(state) {
             state.infoMessage = undefined;
+            state.savedSuccess = undefined;
         }
     },
 

@@ -46,7 +46,6 @@
     clip-path: polygon(100% 0%, 0 0%, 50% 100%);
 }
 
-
 .submitBtn {
     width: 100%;
     border-radius: 3px;
@@ -55,4 +54,14 @@
     color: white;
     background-color: #FFCB3F;
     cursor: pointer;
+}
+
+.errorMsg {
+    margin-top: 4px;
+    color: red;
+}
+
+.successMsg {
+    margin-top: 4px;
+    color: forestgreen;
 }

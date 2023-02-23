@@ -60,7 +60,7 @@ export const mealApi = {
     async addMeal(data: Omit<IMeal, 'id'>) {
         const authToken = localStorage.getItem('authToken');
 
-        return instance.post('/owner', data,{
+        return instance.post('/', data,{
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }

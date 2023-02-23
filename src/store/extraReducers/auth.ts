@@ -26,7 +26,7 @@ export const auhtExtraReducers = (builder: ActionReducerMapBuilder<IAuthState>) 
         })
         .addCase(loginUser.rejected, (state, action) => {
             state.isLoading = false;
-            state.error = action.payload?.message || null;
+            state.error = action.payload?.message[0] || null;
         })
 
     builder
@@ -50,7 +50,7 @@ export const auhtExtraReducers = (builder: ActionReducerMapBuilder<IAuthState>) 
         })
         .addCase(registerUser.rejected, (state, action) => {
             state.isLoading = false;
-            state.error = action.payload?.message || null;
+            state.error = action.payload?.message[0] || null;
         })
 
     builder

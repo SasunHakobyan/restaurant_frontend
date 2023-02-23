@@ -17,7 +17,7 @@ export const restaurantExtraReducers = (builder: ActionReducerMapBuilder<IRestau
         })
         .addCase(fillRestaurants.rejected, (state, action) => {
             state.isLoading = false;
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -30,7 +30,7 @@ export const restaurantExtraReducers = (builder: ActionReducerMapBuilder<IRestau
         })
         .addCase(fillOwnerRestaurants.rejected, (state, action) => {
             state.isLoading = false;
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -39,11 +39,12 @@ export const restaurantExtraReducers = (builder: ActionReducerMapBuilder<IRestau
         })
         .addCase(addRestaurant.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.saved = true;
+            state.infoMessage = 'Restaurant Saved'
+            state.savedSuccess = true;
         })
         .addCase(addRestaurant.rejected, (state, action) => {
             state.isLoading = false;
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -60,7 +61,7 @@ export const restaurantExtraReducers = (builder: ActionReducerMapBuilder<IRestau
         })
         .addCase(getRestaurantFormData.rejected, (state, action) => {
             state.isLoading = false;
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     builder
@@ -68,6 +69,6 @@ export const restaurantExtraReducers = (builder: ActionReducerMapBuilder<IRestau
             state.infoMessage = 'Restaurant Deleted';
         })
         .addCase(deleteRestaurant.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 }

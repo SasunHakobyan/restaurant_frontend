@@ -38,3 +38,8 @@
     margin-top: 4px;
     color: red;
 }
+
+.successMsg {
+    margin-top: 4px;
+    color: forestgreen;
+}

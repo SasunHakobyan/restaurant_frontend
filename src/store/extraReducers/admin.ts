@@ -10,7 +10,7 @@ export const adminExtraReducers = (build: ActionReducerMapBuilder<IAdminState>) 
             state.owners = action.payload;
         })
         .addCase(fillOwners.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     build
@@ -18,7 +18,7 @@ export const adminExtraReducers = (build: ActionReducerMapBuilder<IAdminState>) 
             state.infoMessage = 'Owner Deleted';
         })
         .addCase(deleteOwner.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 
     build
@@ -26,6 +26,6 @@ export const adminExtraReducers = (build: ActionReducerMapBuilder<IAdminState>) 
             state.infoMessage = 'Owner Created';
         })
         .addCase(addOwner.rejected, (state, action) => {
-            state.infoMessage = action.payload?.message;
+            state.infoMessage = action.payload?.message[0];
         })
 }

@@ -3,14 +3,13 @@ import MainContent from '../../../layout/MainContent/MainContent';
 import {IRestaurant} from '../../../models/restaurant';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import styles from './AddRestaurant.module.css';
-import {useNavigate} from "react-router-dom";
 import {addRestaurant} from "../../../store/thunk/restaurant/addRestaurant";
-import React from "react";
+import React, {useEffect} from "react";
+import {clearMessages} from "../../../store/reducers/restaurantReducer";
 
 const AddRestaurantPage = () => {
-    const restaurantState = useAppSelector(state => state.restaurantReducer);
+    const {infoMessage, savedSuccess} = useAppSelector(state => state.restaurantReducer);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     const {
         register,
@@ -20,11 +19,12 @@ const AddRestaurantPage = () => {
         handleSubmit
     } = useForm();
 
-    console.log(errors)
+    useEffect(() => {
+        if (infoMessage) {
+            setTimeout(() => {dispatch(clearMessages())}, 2000);
+        }
+    }, [infoMessage])
 
-    if (restaurantState.saved) {
-        navigate('/');
-    }
 
     const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
         const reqBody: Omit<IRestaurant, "id" | "ownerId"> = {
@@ -40,6 +40,7 @@ const AddRestaurantPage = () => {
         <MainContent>
             <h3>Add Restaurant</h3>
             <form className={styles.form} onSubmit={handleSubmit(formSubmitHandler)}>
+                {infoMessage && <div className={savedSuccess ? styles.successMsg : styles.errorMsg}>{infoMessage}</div>}
                 <div className={styles.formControl}>
                     <label>Name</label>
                     <input {
