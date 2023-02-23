@@ -31,13 +31,19 @@ td img {
 }
 
 .deleteBtn {
+    color: #ff3333;
     padding: 10px;
-    background-color: #ff3333;
-    border: none;
-    color: white;
+    border: 1px solid #ff3333;
     border-radius: 5px;
     cursor: pointer;
     outline: none;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.deleteBtn:hover {
+    background-color: #ff3333;
+    color: white;
 }
 
 .addLink {

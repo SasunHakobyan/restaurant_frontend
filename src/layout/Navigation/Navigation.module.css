@@ -27,14 +27,23 @@ p {
     padding: 1rem;
     align-items: center;
     text-decoration: none;
-    color: black;
-    font-weight: bold;
+    color: #212121;
+    font-weight: normal;
     font-size: 1.1rem;
+    border: 1px solid #fff4de;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    transition: 0.3s;
+}
+
+.navItem:hover {
+    background-color: #f2b000;
+    color: #000000;
 }
 
 .activeItem {
     background-color: #FFCB3F;
-    border-radius: 10px;
+    border-radius: 4px;
     color: black;
 }
 
@@ -53,12 +62,7 @@ p {
 }
 
 .userContainer {
-    background: rgba( 255, 255, 255, 0.3 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 1px );
-    -webkit-backdrop-filter: blur( 1px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 
     padding: 1rem 0;
     width: 100%;

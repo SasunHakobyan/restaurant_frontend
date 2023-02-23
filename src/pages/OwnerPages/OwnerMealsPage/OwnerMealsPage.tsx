@@ -6,6 +6,7 @@ import MainContent from "../../../layout/MainContent/MainContent";
 import {deleteMeal} from "../../../store/thunk/meal/deleteMeal";
 import {setShowMessage} from "../../../store/reducers/modalReducer";
 import {clearMessages} from "../../../store/reducers/mealReducer";
+import {Link} from "react-router-dom";
 
 const OwnerMealsPage = () => {
     const {meals, infoMessage} = useAppSelector(state => state.mealReducer);
@@ -51,7 +52,7 @@ const OwnerMealsPage = () => {
                                     <td>{meal.description}</td>
                                     <td>{meal.price}</td>
                                     <td>{meal.restaurantId}</td>
-                                    <td><button>Edit</button></td>
+                                    <td><Link className={styles.editBtn} to={`/owner/meals/${meal.id}`}>Edit</Link></td>
                                     <td><button className={styles.deleteBtn} onClick={() => deleteMealHandler(meal.id)}>Delete</button></td>
                                 </tr>
                             )

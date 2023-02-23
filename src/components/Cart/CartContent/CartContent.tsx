@@ -7,9 +7,12 @@ import {makeOrder} from "../../../store/thunk/order/makeOrder";
 import {setShowMessage} from "../../../store/reducers/modalReducer";
 import {clearOrderMessages} from "../../../store/reducers/orderReducer";
 
+import plusPng from '../../../assets/logos/plus.png';
+import minusPng from '../../../assets/logos/minus.png';
+
 const CartContent = () => {
     const dispatch = useAppDispatch();
-    const {items, restaurantId} = useAppSelector(state => state.cartReducer);
+    const {items, restaurantId, totalAmount} = useAppSelector(state => state.cartReducer);
     const {createdSuccess, infoMessage} = useAppSelector(state => state.orderReducer);
 
     const plusAmountHandler = (mealId: number) => {
@@ -55,18 +58,27 @@ const CartContent = () => {
                             </div>
                             <div className={styles.cartItemInfoContainer}>
                                 <span>{item.name}</span>
-                                <span>{item.price}</span>
                             </div>
                             <div className={styles.cartItemControl}>
                                 <div className={styles.cartAmountBtns}>
-                                    <button onClick={() => minusAmountHandler(item.mealId)}>-</button>
+                                    <button className={styles.amountBtn} onClick={() => minusAmountHandler(item.mealId)}>
+                                        <img src={minusPng}/>
+                                    </button>
                                     <span>{item.amount}</span>
-                                    <button onClick={() => plusAmountHandler(item.mealId)}>+</button>
+                                    <button className={styles.amountBtn} onClick={() => plusAmountHandler(item.mealId)}>
+                                        <img src={plusPng}/>
+                                    </button>
                                 </div>
+                                <span className={styles.itemPrice}>{item.price * item.amount}$</span>
                             </div>
                         </div>
                     )
                 })}
+                <div>
+                    {items.length !== 0 &&
+                        <h4>Total Amount: {totalAmount}</h4>
+                    }
+                </div>
                 <div>
                     {items.length > 0 &&
                         <button onClick={makeOrderHandler} className={styles.makeOrderBtn}>Make Order</button>

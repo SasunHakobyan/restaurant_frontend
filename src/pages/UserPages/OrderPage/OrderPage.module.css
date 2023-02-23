@@ -2,9 +2,29 @@
     display: flex;
     flex-direction: row;
     justify-content: start;
+    height: 100%;
+}
+
+.notFoundContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderNotFoundImg {
+    width: 250px;
+}
+
+.toMealsLink {
+    text-decoration: underline;
+    color: #f2b000;
 }
 
 .ordersTable {
+    height: fit-content;
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;

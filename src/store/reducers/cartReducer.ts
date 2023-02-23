@@ -1,18 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ICartItem} from "../../models/cart";
+import {stat} from "fs";
 
 type ICartState = {
     restaurantId: number | undefined;
     cartToggle: boolean;
     itemCount: number;
-    items: ICartItem[]
+    items: ICartItem[];
+    totalAmount: number;
 }
 
 const initialState: ICartState = {
     restaurantId: undefined,
     cartToggle: false,
     itemCount: 0,
-    items: []
+    items: [],
+    totalAmount: 0,
 }
 
 export const cartSlice = createSlice({
@@ -28,6 +31,7 @@ export const cartSlice = createSlice({
             state.cartToggle = false;
             state.itemCount = 0;
             state.items = [];
+            state.totalAmount = 0;
         },
 
         addToCart(state, action) {
@@ -52,6 +56,7 @@ export const cartSlice = createSlice({
                         price: action.payload.price
                     });
 
+                    state.totalAmount += action.payload.price;
                     state.itemCount++;
                 }
             }
@@ -65,6 +70,7 @@ export const cartSlice = createSlice({
 
             if (objectIndex !== -1) {
                 state.items[objectIndex].amount++;
+                state.totalAmount += state.items[objectIndex].price;
             }
         },
 
@@ -76,12 +82,17 @@ export const cartSlice = createSlice({
 
             if (objectIndex !== -1 && state.items[objectIndex].amount !== 1) {
                 state.items[objectIndex].amount--;
+                state.totalAmount -= state.items[objectIndex].price;
             }
         },
 
         deleteItem(state, action) {
             state.items = state.items.filter(item => {
-                return item.mealId !== action.payload;
+                if (item.mealId !== action.payload) {
+                    return true
+                } else {
+                    state.totalAmount -= item.amount * item.price
+                }
             })
 
             state.itemCount--;

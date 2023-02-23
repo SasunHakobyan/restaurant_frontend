@@ -55,6 +55,7 @@
 }
 
 .deleteBtn {
+    cursor: pointer;
     position: absolute;
     top: 0;
     left: 0;
@@ -81,14 +82,28 @@
     margin-bottom: 10px;
 }
 
-.cartAmountBtns button {
+.amountBtn {
     margin: 0 10px;
-    background-color: rgb(255, 203, 63);
-    border: none;
+    border: 1px solid #FFCB3F;
+    background-color: white;
     border-radius: 5px;
     padding: 8px;
     font-weight: bold;
     cursor: pointer;
+    transition: .2s;
+}
+
+.amountBtn:hover {
+    background-color: #f2b000;
+}
+
+.amountBtn img {
+    width: 10px;
+    height: 10px;
+}
+
+.itemPrice {
+    color: #212121;
 }
 
 .makeOrderBtn {
