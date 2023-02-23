@@ -5,8 +5,8 @@ import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {fillOwners} from "../../../store/thunk/admin/fillOwners";
 import {deleteOwner} from "../../../store/thunk/admin/deleteOwner";
 import {Link} from "react-router-dom";
-import {modalSlice} from "../../../store/reducers/modalReducer";
-import {adminSlice} from "../../../store/reducers/adminReducer";
+import {modalSlice, setShowMessage} from "../../../store/reducers/modalReducer";
+import {adminSlice, clearMessages} from "../../../store/reducers/adminReducer";
 
 const OwnersPage = () => {
     const {owners, infoMessage} = useAppSelector(state => state.adminReducer);
@@ -22,8 +22,8 @@ const OwnersPage = () => {
 
     useEffect(() => {
         if (infoMessage) {
-            dispatch(modalSlice.actions.setShowMessage({toggle: true, message: infoMessage}))
-            dispatch(adminSlice.actions.clearMessages());
+            dispatch(setShowMessage({toggle: true, message: infoMessage}))
+            dispatch(clearMessages());
         }
 
         fetchOwners();

@@ -8,11 +8,11 @@ import orderLogo from '../../assets/logos/order.png'
 
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {authSlice} from "../../store/reducers/authReducer";
+import {logout, setFormOption, setShowModal} from "../../store/reducers/authReducer";
 import {useAppSelector} from "../../store/store";
 import {RoleValue, UserSign} from "../../models/user";
 import {MouseEventHandler} from "react";
-import {modalSlice} from "../../store/reducers/modalReducer";
+import {setShowMessage} from "../../store/reducers/modalReducer";
 
 interface INavigationProps {
     isLoggedIn: boolean;
@@ -24,12 +24,12 @@ const Navigation = (props: INavigationProps) => {
     const navigate = useNavigate();
 
     const onProfileButtonClick = (option: UserSign) => {
-        dispatch(authSlice.actions.setShowModal(true));
-        dispatch(authSlice.actions.setFormOption(option));
+        dispatch(setShowModal(true));
+        dispatch(setFormOption(option));
     }
 
     const onLogoutButtonClick = () => {
-        dispatch(authSlice.actions.logout());
+        dispatch(logout());
         navigate('/')
     }
 
@@ -37,7 +37,7 @@ const Navigation = (props: INavigationProps) => {
         if (!props.isLoggedIn) {
             e.preventDefault();
 
-            dispatch(modalSlice.actions.setShowMessage({
+            dispatch(setShowMessage({
                 toggle: true,
                 message: 'Please signIn to see content'
             }));

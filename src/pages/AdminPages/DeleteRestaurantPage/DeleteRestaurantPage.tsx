@@ -4,8 +4,8 @@ import MainContent from "../../../layout/MainContent/MainContent";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {fillRestaurants} from "../../../store/thunk/restaurant/fillRestaurants";
 import {deleteRestaurant} from "../../../store/thunk/restaurant/deleteRestaurant";
-import {modalSlice} from "../../../store/reducers/modalReducer";
-import {restaurantSlice} from "../../../store/reducers/restaurantReducer";
+import {setShowMessage} from "../../../store/reducers/modalReducer";
+import {clearMessages} from "../../../store/reducers/restaurantReducer";
 
 const DeleteRestaurantPage = () => {
     const dispatch = useAppDispatch();
@@ -21,11 +21,11 @@ const DeleteRestaurantPage = () => {
 
     useEffect(() => {
         if (infoMessage) {
-            dispatch(modalSlice.actions.setShowMessage({
+            dispatch(setShowMessage({
                 toggle: true,
                 message: infoMessage
             }));
-            dispatch(restaurantSlice.actions.clearMessages());
+            dispatch(clearMessages());
         }
     }, [infoMessage])
 

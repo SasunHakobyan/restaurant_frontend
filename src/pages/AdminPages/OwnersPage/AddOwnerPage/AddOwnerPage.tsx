@@ -5,8 +5,8 @@ import {useAppDispatch, useAppSelector} from "../../../../store/store";
 import MainContent from "../../../../layout/MainContent/MainContent";
 import {addOwner} from "../../../../store/thunk/admin/addOwner";
 import {IUserAuth} from "../../../../models/user";
-import {modalSlice} from "../../../../store/reducers/modalReducer";
-import {adminSlice} from "../../../../store/reducers/adminReducer";
+import {setShowMessage} from "../../../../store/reducers/modalReducer";
+import {clearMessages} from "../../../../store/reducers/adminReducer";
 import {useNavigate} from "react-router-dom";
 
 const AddOwnerPage = () => {
@@ -24,8 +24,8 @@ const AddOwnerPage = () => {
 
     useEffect(() => {
         if (infoMessage) {
-            dispatch(modalSlice.actions.setShowMessage({toggle: true, message: infoMessage}))
-            dispatch(adminSlice.actions.clearMessages());
+            dispatch(setShowMessage({toggle: true, message: infoMessage}))
+            dispatch(clearMessages());
 
             navigate('/admin/owners');
         }

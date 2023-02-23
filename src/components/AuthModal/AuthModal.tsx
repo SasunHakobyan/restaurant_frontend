@@ -3,7 +3,7 @@ import SignForm from "./SignForm/SignForm";
 import styles from './AuthModal.module.css';
 import React from "react";
 import classNames from "classnames";
-import {authSlice} from "../../store/reducers/authReducer";
+import {setFormOption, setShowModal} from "../../store/reducers/authReducer";
 import {useAppDispatch, useAppSelector} from "../../store/store";
 import {UserSign} from "../../models/user";
 
@@ -12,11 +12,11 @@ const AuthModal = () => {
     const authState = useAppSelector(state => state.authReducer);
 
     const closeModal = () => {
-        dispatch(authSlice.actions.setShowModal(false))
+        dispatch(setShowModal(false))
     }
 
     const changeOptionHandler = (option: UserSign) => {
-        dispatch(authSlice.actions.setFormOption(option));
+        dispatch(setFormOption(option));
     }
 
     const loginClassNames = classNames(

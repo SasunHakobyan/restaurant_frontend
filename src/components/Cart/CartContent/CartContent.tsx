@@ -4,7 +4,7 @@ import styles from "../Cart.module.css";
 import React, {useEffect} from "react";
 import {IOrderData} from "../../../models/order";
 import {makeOrder} from "../../../store/thunk/order/makeOrder";
-import {modalSlice} from "../../../store/reducers/modalReducer";
+import {setShowMessage} from "../../../store/reducers/modalReducer";
 import {clearOrderMessages} from "../../../store/reducers/orderReducer";
 
 const CartContent = () => {
@@ -37,7 +37,7 @@ const CartContent = () => {
 
     useEffect(() => {
         if (createdSuccess && infoMessage) {
-            dispatch(modalSlice.actions.setShowMessage({toggle: true, message: infoMessage}))
+            dispatch(setShowMessage({toggle: true, message: infoMessage}))
             dispatch(clearCart());
             dispatch(clearOrderMessages());
         }
