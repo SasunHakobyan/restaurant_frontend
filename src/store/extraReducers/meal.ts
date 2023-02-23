@@ -9,11 +9,16 @@ import {deleteMeal} from "../thunk/meal/deleteMeal";
 
 export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) => {
     builder
+        .addCase(fillMeals.pending, (state, action) => {
+            state.isLoading = true;
+        })
         .addCase(fillMeals.fulfilled, (state, action) => {
             state.meals = action.payload;
+            state.isLoading = false;
         })
         .addCase(fillMeals.rejected, (state, action) => {
             state.infoMessage = action.payload?.message;
+            state.isLoading = false;
         })
 
     builder

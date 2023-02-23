@@ -7,6 +7,7 @@ export type IMealState = {
     infoMessage: string | undefined;
     mealDetailId: number | undefined;
     mealDetail: IMeal | undefined;
+    isLoading: boolean;
 }
 
 const initialState: IMealState = {
@@ -14,6 +15,7 @@ const initialState: IMealState = {
     infoMessage: undefined,
     mealDetailId: undefined,
     mealDetail: undefined,
+    isLoading: false
 }
 
 export const mealSlice = createSlice({
