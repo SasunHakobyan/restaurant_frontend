@@ -1,4 +1,3 @@
-import { IAddRestaurant } from '../../models/restaurant';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { restaurantApi } from "../../api/restaurantApi";
 import { IRestaurant } from "../../models/restaurant";
@@ -9,7 +8,7 @@ import {fillOwnerRestaurants} from "../thunk/restaurant/fillOwnerRestaurants";
 
 interface IRestaurantState {
     restaurants: IRestaurant[] | null;
-    restaurantFormData: IAddRestaurant;
+    restaurantFormData: Omit<IRestaurant, "id" | "ownerId">;
     saved: boolean;
     isLoading: boolean;
     infoMessage: string | undefined;

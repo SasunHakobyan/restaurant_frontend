@@ -1,4 +1,4 @@
-import { IAddRestaurant } from '../models/restaurant';
+import { IRestaurant } from '../models/restaurant';
 import axios from "axios";
 
 const instance = axios.create({
@@ -26,7 +26,7 @@ export const restaurantApi = {
         });
     },
 
-    async addRestaurant(data: IAddRestaurant) {
+    async addRestaurant(data: Omit<IRestaurant, "id" | "ownerId">) {
         const authToken = localStorage.getItem('authToken');
 
         return instance.post('', data, {
@@ -36,7 +36,7 @@ export const restaurantApi = {
         })
     },
 
-    async editRestaurant(restaurantId: number, data: IAddRestaurant) {
+    async editRestaurant(restaurantId: number, data: Omit<IRestaurant, "id" | "ownerId">) {
         const authToken = localStorage.getItem('authToken');
 
         return instance.patch(`/${restaurantId}`, data, {

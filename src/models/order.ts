@@ -1,5 +1,4 @@
 import {IRestaurant} from "./restaurant";
-import {IMeal} from "./meal";
 
 export enum Status {
     Placed = "Placed",

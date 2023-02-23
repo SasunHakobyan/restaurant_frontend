@@ -33,3 +33,8 @@
     background-color: #FFCB3F;
     cursor: pointer;
 }
+
+.errorMsg {
+    margin-top: 4px;
+    color: red;
+}

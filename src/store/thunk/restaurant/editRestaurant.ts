@@ -1,10 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {IAddRestaurant} from "../../../models/restaurant";
 import {restaurantApi} from "../../../api/restaurantApi";
+import {IRestaurant} from "../../../models/restaurant";
 
 interface IEditParams {
     restaurantId: number;
-    restaurant: IAddRestaurant;
+    restaurant: Omit<IRestaurant, "id" | "ownerId">;
 }
 
 export const editRestaurant = createAsyncThunk(

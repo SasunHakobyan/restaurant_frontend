@@ -1,6 +1,6 @@
 import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import MainContent from '../../../layout/MainContent/MainContent';
-import {IAddRestaurant} from '../../../models/restaurant';
+import {IRestaurant} from '../../../models/restaurant';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import styles from './AddRestaurant.module.css';
 import {useNavigate} from "react-router-dom";
@@ -20,12 +20,14 @@ const AddRestaurantPage = () => {
         handleSubmit
     } = useForm();
 
+    console.log(errors)
+
     if (restaurantState.saved) {
         navigate('/');
     }
 
     const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
-        const reqBody: IAddRestaurant = {
+        const reqBody: Omit<IRestaurant, "id" | "ownerId"> = {
             name: data.name,
             description: data.description,
             imgUrl: data.imgUrl
@@ -43,7 +45,10 @@ const AddRestaurantPage = () => {
                     <input {
                                ...register('name', {
                                    required: 'Name is required',
-                                   minLength: 4
+                                   minLength: {
+                                       value: 4,
+                                       message: 'Name length must be bigger or equal to 4'
+                                   }
                                })
                            } />
                     {errors?.name && <span className={styles.errorMsg}>{errors?.name?.message?.toString()}</span>}
@@ -53,17 +58,22 @@ const AddRestaurantPage = () => {
                     <textarea {
                                   ...register('description', {
                                       required: 'Description is required',
-                                      minLength: 4
+                                      minLength: {
+                                          value: 4,
+                                          message: 'Description length must be bigger or equal to 4'
+                                      }
                                   })
                               } />
+                    {errors?.description && <span className={styles.errorMsg}>{errors?.description?.message?.toString()}</span>}
                 </div>
                 <div className={styles.formControl}>
                     <label>Img Url</label>
                     <input {
                                ...register('imgUrl', {
-                                   required: 'imgUrl is required',
+                                   required: 'Image Url is required',
                                })
                            } />
+                    {errors?.imgUrl && <span className={styles.errorMsg}>{errors?.imgUrl?.message?.toString()}</span>}
                 </div>
                 <input className={styles.submitBtn} type='submit' value='Add'/>
             </form>

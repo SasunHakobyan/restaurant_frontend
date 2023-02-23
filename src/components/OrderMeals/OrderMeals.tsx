@@ -1,9 +1,7 @@
 import React, {useEffect} from 'react';
 import {IOrderMeal} from "../../models/order";
 import styles from './OrderMeals.module.css';
-import Modal from "../../layout/Modal/Modal";
 import {useAppDispatch, useAppSelector} from "../../store/store";
-import {fillMealsByIds} from "../../store/thunk/meal/fillMealsByIds";
 import OrderMealItem from "./OrderMealItem/OrderMealItem";
 
 interface IOrderMealsProps {

@@ -5,7 +5,7 @@ import {useParams} from 'react-router-dom';
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {getRestaurantFormData} from "../../../store/reducers/restaurantReducer";
-import {IAddRestaurant} from "../../../models/restaurant";
+import {IRestaurant} from "../../../models/restaurant";
 import {editRestaurant} from "../../../store/thunk/restaurant/editRestaurant";
 
 const EditRestaurantPage = () => {
@@ -26,7 +26,7 @@ const EditRestaurantPage = () => {
     } = useForm();
 
     const formSubmitHandler: SubmitHandler<FieldValues> = async (data) => {
-        const reqBody: IAddRestaurant = {
+        const reqBody: Omit<IRestaurant, "id" | "ownerId"> = {
             name: data.name,
             description: data.description,
             imgUrl: data.imgUrl

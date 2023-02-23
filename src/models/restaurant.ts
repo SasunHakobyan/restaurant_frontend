@@ -1,8 +1,8 @@
-export interface IAddRestaurant {
-    name: string;
-    description: string;
-    imgUrl: string;
-}
+// export interface IAddRestaurant {
+//     name: string;
+//     description: string;
+//     imgUrl: string;
+// }
 
 export interface IRestaurant {
     id: number;

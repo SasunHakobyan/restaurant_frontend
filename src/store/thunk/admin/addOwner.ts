@@ -1,12 +1,13 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {userApi} from "../../../api/userApi";
-import {IUser, IUserAuth, UserNotFoundError} from "../../../models/user";
+import {IUser, IUserAuth} from "../../../models/user";
 import {AxiosError} from "axios";
+import {ServerError} from "../../../models/errors";
 
 export const addOwner = createAsyncThunk<
     {user: IUser},
     IUserAuth,
-    {rejectValue: UserNotFoundError}
+    {rejectValue: ServerError}
 >(
     'admin/addOwner',
     async (data: IUserAuth, {rejectWithValue}) => {
@@ -15,7 +16,7 @@ export const addOwner = createAsyncThunk<
             return response.data;
         } catch (err) {
             if (err instanceof AxiosError) {
-                return rejectWithValue(err?.response?.data as UserNotFoundError);
+                return rejectWithValue(err?.response?.data as ServerError);
             }
         }
     }
