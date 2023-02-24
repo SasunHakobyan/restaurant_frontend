@@ -6,6 +6,7 @@ import {fillOwnerRestaurants} from "../../../store/thunk/restaurant/fillOwnerRes
 import {deleteRestaurant} from "../../../store/thunk/restaurant/deleteRestaurant";
 import {setShowMessage} from "../../../store/reducers/modalReducer";
 import {clearMessages} from "../../../store/reducers/restaurantReducer";
+import {Link} from "react-router-dom";
 
 const OwnerRestaurantsPage = () => {
     const dispatch = useAppDispatch();
@@ -34,6 +35,7 @@ const OwnerRestaurantsPage = () => {
                         <th>Name</th>
                         <th>Img</th>
                         <th>Description</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
@@ -46,6 +48,11 @@ const OwnerRestaurantsPage = () => {
                                     <td>{restaurant.name}</td>
                                     <td><img src={restaurant.imgUrl}/></td>
                                     <td>{restaurant.description}</td>
+                                    <td>
+                                        <Link to={`/owner/edit-restaurant/${restaurant.id}`} className={styles.editBtn}>
+                                            Edit
+                                        </Link>
+                                    </td>
                                     <td>
                                         <button
                                             onClick={() => deleteRestaurantHandler(restaurant.id)}

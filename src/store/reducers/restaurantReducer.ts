@@ -29,7 +29,7 @@ export const restaurantSlice = createSlice({
         clearMessages(state) {
             state.infoMessage = undefined;
             state.savedSuccess = undefined;
-        }
+        },
     },
 
     extraReducers: restaurantExtraReducers

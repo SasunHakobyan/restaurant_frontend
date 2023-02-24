@@ -60,7 +60,7 @@ const OrderPage = () => {
                                         <td>{order.id}</td>
                                         <td>{order.restaurant.name}</td>
                                         <td>
-                                            <OrderMeals orderMeals={order.orderMeals}/>
+                                            Order Meals
                                         </td>
                                         <td>{order.status}</td>
                                         <td>{order.totalAmount}</td>

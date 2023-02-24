@@ -46,6 +46,22 @@ td img {
     color: white;
 }
 
+.editBtn {
+    text-decoration: none;
+    color: #f2b000;
+    border: 1px solid #f2b000;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.editBtn:hover {
+    background-color: #f2b000;
+    color: white;
+}
+
 .addLink {
     padding: 10px;
     text-decoration: none;
