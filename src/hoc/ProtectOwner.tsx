@@ -9,9 +9,8 @@ interface IProtectOwnerProps {
 
 const ProtectOwner = (props: IProtectOwnerProps) => {
     const authState = useAppSelector(state => state.authReducer);
-    const navigate = useNavigate();
 
-    if (authState.user.role.value !== RoleValue.RestOwner) {
+    if (!authState.isLoading && authState.user.role.value !== RoleValue.RestOwner) {
         return <Navigate to='/' />
     }
 

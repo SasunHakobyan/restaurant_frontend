@@ -19,7 +19,7 @@ const OwnerRestaurantsPage = () => {
         }
 
         dispatch(fillOwnerRestaurants());
-    }, [restaurants])
+    }, [])
 
     const deleteRestaurantHandler = (id: number) => {
         dispatch(deleteRestaurant(id))

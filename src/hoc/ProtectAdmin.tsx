@@ -9,9 +9,8 @@ interface IProtectAdminProps {
 
 const ProtectAdmin = (props: IProtectAdminProps) => {
     const authState = useAppSelector(state => state.authReducer);
-    const navigate = useNavigate();
 
-    if (authState.user.role.value !== RoleValue.Admin) {
+    if (!authState.isLoading && authState.user.role.value !== RoleValue.Admin) {
         return <Navigate to='/' />
     }
 

@@ -19,7 +19,7 @@ const OwnerMealsPage = () => {
             dispatch(setShowMessage({toggle: true, message: infoMessage}));
             dispatch(clearMessages());
         }
-    }, [meals])
+    }, [])
 
     const deleteMealHandler = (id: number) => {
         dispatch(deleteMeal(id));

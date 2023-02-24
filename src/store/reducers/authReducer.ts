@@ -14,7 +14,7 @@ export type IAuthState = {
 const initialState: IAuthState = {
     authFormOption: UserSign.SignIn,
     showModal: false,
-    isLoading: false,
+    isLoading: true,
     error: null,
     isLoggedIn: false,
     user: {

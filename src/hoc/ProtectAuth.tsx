@@ -1,4 +1,5 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../store/store';
 
 interface IProtectAuthProps {
@@ -7,9 +8,8 @@ interface IProtectAuthProps {
 
 export function ProtectAuth(props: IProtectAuthProps) {
 	const authState = useAppSelector(state => state.authReducer);
-	const navigate = useNavigate();
 
-	if (!authState.isLoggedIn) {
+	if (!authState.isLoading && !authState.isLoggedIn) {
 		return <Navigate to='/' />
 	}
 
