@@ -5,6 +5,7 @@ import {fillOwnerRestaurants} from "../thunk/restaurant/fillOwnerRestaurants";
 import {addRestaurant} from "../thunk/restaurant/addRestaurant";
 import {deleteRestaurant} from "../thunk/restaurant/deleteRestaurant";
 import {getRestaurantFormData} from "../thunk/restaurant/getRestaurantFormData";
+import {editRestaurant} from "../thunk/restaurant/editRestaurant";
 
 export const restaurantExtraReducers = (builder: ActionReducerMapBuilder<IRestaurantState>) => {
     builder
@@ -60,6 +61,16 @@ export const restaurantExtraReducers = (builder: ActionReducerMapBuilder<IRestau
             }
         })
         .addCase(getRestaurantFormData.rejected, (state, action) => {
+            state.isLoading = false;
+            state.infoMessage = action.payload?.message[0];
+        })
+
+    builder
+        .addCase(editRestaurant.fulfilled, (state, action) => {
+            state.infoMessage = 'Done!'
+            state.savedSuccess = true;
+        })
+        .addCase(editRestaurant.rejected, (state, action) => {
             state.isLoading = false;
             state.infoMessage = action.payload?.message[0];
         })
