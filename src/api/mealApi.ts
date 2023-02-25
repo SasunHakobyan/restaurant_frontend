@@ -67,6 +67,16 @@ export const mealApi = {
         });
     },
 
+    async editMeal(data: IMeal) {
+        const authToken = localStorage.getItem('authToken');
+
+        return instance.patch('/', data,{
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+    },
+
     async deleteMeal(mealId: number) {
         const authToken = localStorage.getItem('authToken');
 

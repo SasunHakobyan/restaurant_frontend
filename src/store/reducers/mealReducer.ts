@@ -8,6 +8,7 @@ export type IMealState = {
     successSave: boolean | undefined;
     mealDetailId: number | undefined;
     mealDetail: IMeal | undefined;
+    mealFormData: Omit<IMeal, "id">;
     isLoading: boolean;
 }
 
@@ -15,6 +16,13 @@ const initialState: IMealState = {
     meals: null,
     infoMessage: undefined,
     successSave: undefined,
+    mealFormData: {
+        name: '',
+        description: '',
+        imgUrl: '',
+        restaurantId: 0,
+        price: 0
+    },
     mealDetailId: undefined,
     mealDetail: undefined,
     isLoading: false

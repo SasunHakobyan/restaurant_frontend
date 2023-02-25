@@ -61,32 +61,36 @@ const Navigation = (props: INavigationProps) => {
                         <p className={styles.menuText}>Home</p>
                     </NavLink>
                 </div>
-                <div className={styles.itemContainer}>
-                    <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
-                             className={styles.navItem}
-                             onClick={navLinkHandler}
-                             to='/restaurants'>
-                        <img alt='menu' className={styles.logo} src={restaurantLogo}/>
-                        <p className={styles.menuText}>Restaurants</p>
-                    </NavLink>
-                </div>
-                <div className={styles.itemContainer}>
-                    <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
-                             className={styles.navItem}
-                             onClick={navLinkHandler}
-                             to='/meals'>
-                        <img alt='menu' className={styles.logo} src={mealLogo}/>
-                        <p className={styles.menuText}>Meals</p>
-                    </NavLink>
-                </div>
                 {props.isLoggedIn &&
-                    <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
-                             className={styles.navItem}
-                             onClick={navLinkHandler}
-                             to='/orders'>
-                        <img alt='menu' className={styles.logo} src={orderLogo}/>
-                        <p className={styles.menuText}>Orders</p>
-                    </NavLink>
+                    <>
+                        <div className={styles.itemContainer}>
+                            <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
+                                     className={styles.navItem}
+                                     onClick={navLinkHandler}
+                                     to='/restaurants'>
+                                <img alt='menu' className={styles.logo} src={restaurantLogo}/>
+                                <p className={styles.menuText}>Restaurants</p>
+                            </NavLink>
+                        </div>
+                        <div className={styles.itemContainer}>
+                            <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
+                                     className={styles.navItem}
+                                     onClick={navLinkHandler}
+                                     to='/meals'>
+                                <img alt='menu' className={styles.logo} src={mealLogo}/>
+                                <p className={styles.menuText}>Meals</p>
+                            </NavLink>
+                        </div>
+                        <div className={styles.itemContainer}>
+                            <NavLink style={({isActive}) => isActive ? activeItemStyles : undefined}
+                                     className={styles.navItem}
+                                     onClick={navLinkHandler}
+                                     to='/orders'>
+                                <img alt='menu' className={styles.logo} src={orderLogo}/>
+                                <p className={styles.menuText}>Orders</p>
+                            </NavLink>
+                        </div>
+                    </>
                 }
             </div>
 

@@ -52,7 +52,7 @@ const OwnerMealsPage = () => {
                                     <td>{meal.description}</td>
                                     <td>{meal.price}</td>
                                     <td>{meal.restaurantId}</td>
-                                    <td><Link className={styles.editBtn} to={`/owner/meals/${meal.id}`}>Edit</Link></td>
+                                    <td><Link className={styles.editBtn} to={`/owner/edit-meal/${meal.id}`}>Edit</Link></td>
                                     <td><button className={styles.deleteBtn} onClick={() => deleteMealHandler(meal.id)}>Delete</button></td>
                                 </tr>
                             )

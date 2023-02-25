@@ -7,6 +7,7 @@ import {fillRestaurantMeals} from "../thunk/meal/fillRestaurantMeals";
 import {fillMealsByIds} from "../thunk/meal/fillMealsByIds";
 import {deleteMeal} from "../thunk/meal/deleteMeal";
 import {addMeal} from "../thunk/meal/addMeal";
+import {editMeal} from "../thunk/meal/editMeal";
 
 export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) => {
     builder
@@ -60,6 +61,15 @@ export const mealExtraReducers = (builder: ActionReducerMapBuilder<IMealState>) 
             state.infoMessage = 'Meal was created';
         })
         .addCase(addMeal.rejected, (state, action) => {
+            state.infoMessage = action.payload?.message[0];
+        })
+
+    builder
+        .addCase(editMeal.fulfilled, (state, action) => {
+            state.successSave = true;
+            state.infoMessage = 'Meal was updated';
+        })
+        .addCase(editMeal.rejected, (state, action) => {
             state.infoMessage = action.payload?.message[0];
         })
 
