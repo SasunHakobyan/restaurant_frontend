@@ -3,7 +3,6 @@ import styles from './OrderPage.module.css';
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import {getOrders} from "../../../store/thunk/order/getOrders";
 import MainContent from "../../../layout/MainContent/MainContent";
-import OrderMeals from "../../../components/OrderMeals/OrderMeals";
 import {toggleStatusModal} from "../../../store/reducers/orderReducer";
 import StatusModal from "./StatusModal/StatusModal";
 import {Status} from "../../../models/order";
@@ -60,7 +59,9 @@ const OrderPage = () => {
                                         <td>{order.id}</td>
                                         <td>{order.restaurant.name}</td>
                                         <td>
-
+                                            {order.orderMeals.map((orderMeal, index) => {
+                                                return <span key={index}>{orderMeal.mealId}: {orderMeal.amount}</span>
+                                            })}
                                         </td>
                                         <td>{order.status}</td>
                                         <td>{order.totalAmount}</td>
